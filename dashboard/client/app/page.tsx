@@ -12,12 +12,9 @@ import {
   TabsContent,
 
 } from "@/components/ui/tabs"
-import { MainNav } from "@/components/dashboard/main-nav"
 import { Overview } from "@/components/dashboard/overview"
 import { RecentSales } from "@/components/dashboard/recent-sales"
-import { Search } from "@/components/dashboard/search"
-import { UserNav } from "@/components/dashboard/user-nav"
-import { ThemeToggle } from "@/components/ThemeToggle"
+
 import Nav from "@/components/Nav"
 
 export const metadata: Metadata = {

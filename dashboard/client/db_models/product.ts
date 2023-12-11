@@ -3,13 +3,11 @@ export type product = {
   name: string;
   description: string;
   price: number;
-  isOnSale: boolean;
-  isSoldOut: boolean;
-  isHidden: boolean;
   imgLink: string;
-  isComingSoon: boolean;
   count: number;
   orderTimes: number;
   categoryId: string;
   salePrice: number;
+  additionalImages: string[];
+  status: "onSale" | "soldOut" | "hidden" | "comingSoon" | "published";
 };
