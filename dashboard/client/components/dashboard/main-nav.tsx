@@ -34,12 +34,7 @@ export function MainNav({
             >
                 Orders
             </Link>
-            <Link
-                href="/sales"
-                className={currentPage == "Sales" ? currentPageClass : otherPageClass}
-            >
-                Sales
-            </Link>
+
         </nav>
     )
 }

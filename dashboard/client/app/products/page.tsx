@@ -4,7 +4,7 @@ import { Search } from "lucide-react"
 import Products from '../../components/products/Products';
 import Link from 'next/link';
 
-export default async function page() {
+export default async function Page() {
     const productsData = await (await fetch("http://localhost/api/products.php")).json().catch(err => console.error(err))
 
     return <main>

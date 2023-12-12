@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 
-export default async function page({ params }: { params: { productId: string } }) {
+export default async function Page({ params }: { params: { productId: string } }) {
     const fakeProduct = {
         "productId": 1,
         "name": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",

@@ -40,7 +40,6 @@ export function UserNav() {
                     <DropdownMenuItem>Home</DropdownMenuItem>
                     <DropdownMenuItem>Products</DropdownMenuItem>
                     <DropdownMenuItem>Orders</DropdownMenuItem>
-                    <DropdownMenuItem>Sales</DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
