@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id String @id @default(uuid())
+  name String
+  products Product[]
+}
+model Product {
+  id               String   @id @default(uuid())
+  name             String
+  description      String
+  price            Decimal
+  imgLink          String
+  stock            Int
+  orderTimes       Int
+  salePrice        Decimal
+  additionalImages String[]
+  status           String // "onSale" | "soldOut" | "hidden" | "comingSoon" | "published";
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  createdAt DateTime @default(now())
+  orders Order[]
+}
+
+model Order {
+  id String @id @default(uuid())
+  userName String
+  orderPrice Decimal
+  product Product @relation(fields: [productId] , references: [id])
+  productId String
+  createdAt DateTime @default(now())
+  isDashboardHidden Boolean
+  status String // waiting | validated | sent | canceled
+}
+
+
+model visits {
+  id String @id @default(uuid())
+  totalVisits  BigInt
+}

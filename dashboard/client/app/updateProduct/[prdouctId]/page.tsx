@@ -38,9 +38,10 @@ export default async function Page({ params }: { params: { productId: string } }
                         <SelectContent>
                             <SelectGroup>
                                 <SelectItem value="published">published</SelectItem>
-                                <SelectItem value="on sale">on sale</SelectItem>
-                                <SelectItem value="coming soon">coming soon</SelectItem>
+                                <SelectItem value="onSale">on sale</SelectItem>
+                                <SelectItem value="comingSoon">coming soon</SelectItem>
                                 <SelectItem value="hidden">hidden</SelectItem>
+                                <SelectItem value="soldOut">sold out</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
