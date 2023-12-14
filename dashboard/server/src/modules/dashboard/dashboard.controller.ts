@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { getCanceledOrdersCount, getLastWeekOrders, getOrdersCount, getTotalRevenue, getVisitsCount } from "./dashboard.service";
+import { getCanceledOrdersCount, getLastWeekOrders, getLatestOrders, getOrdersCount, getTotalRevenue } from "../order/order.service";
+import { getVisitsCount } from "./dashboard.service"
 
 export async function getDataHandler(req: FastifyRequest, reply: FastifyReply) {
     // get the total revenue
@@ -10,9 +11,10 @@ export async function getDataHandler(req: FastifyRequest, reply: FastifyReply) {
         const canceledOrdersCount = await getCanceledOrdersCount()
         const visits = await getVisitsCount()
         const lastWeekOrders = await getLastWeekOrders()
-        reply.send({ revenue, canceledOrdersCount, ordersCount, visits, lastWeekOrders })
+        const latestOrders = await getLatestOrders()
+        reply.send({ data : {revenue, canceledOrdersCount, ordersCount, visits, lastWeekOrders, latestOrders } , error : null })
+
     } catch (err) {
-        //TODO handle this error
-        reply.status(500).send({})
+        reply.status(500).send({ error: err.message , data : null })
     }
 }

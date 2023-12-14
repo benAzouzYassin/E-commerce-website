@@ -1,0 +1,1 @@
+fastify have a cli

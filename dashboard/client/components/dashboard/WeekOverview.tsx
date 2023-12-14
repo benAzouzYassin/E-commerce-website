@@ -1,43 +1,24 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
-const data = [
-    {
-        name: "Monday",
-        total: Math.floor(Math.random() * 100) + 1000,
-    },
-    {
-        name: "Tuesday",
-        total: Math.floor(Math.random() * 1000) + 1000,
-    },
-    {
-        name: "Wednesday",
-        total: Math.floor(Math.random() * 500) + 1000,
-    },
-    {
-        name: "Thursday",
-        total: Math.floor(Math.random() * 100) + 1000,
-    },
-    {
-        name: "Friday",
-        total: Math.floor(Math.random() * 100) + 1000,
-    },
-    {
-        name: "Saturday",
-        total: Math.floor(Math.random() * 300) + 1000,
-    },
-    {
-        name: "Sunday",
-        total: Math.floor(Math.random() * 100) + 1000,
-    },
+export function WeekOverview({ weekData }: { weekData: any }) {
+    const [chartData, setChartData] = useState<{ name: any; total: any }[]>([])
+    useEffect(() => {
+        if (weekData) {
+            console.log(weekData)
+            const finalData = []
+            for (const day in weekData) {
+                finalData.push({ name: day, total: weekData[day] })
+            }
+            setChartData(finalData)
+        }
+    }, [weekData])
 
-]
-
-export function Overview() {
     return (
         <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={data}>
+            <BarChart data={chartData}>
                 <XAxis
                     dataKey="name"
                     stroke="#888888"
