@@ -4,5 +4,5 @@ import { $ref } from "./category.schema"
 
 export async function categoryRouter(server: FastifyInstance) {
     server.get("/getAll", getAllHandler)
-    server.post("/createOne", { schema: { body: $ref("CategorySchema") } }, createOneHandler)
+    server.post("/createOne", { schema: { body: $ref("CreateCategorySchema") } }, createOneHandler)
 }

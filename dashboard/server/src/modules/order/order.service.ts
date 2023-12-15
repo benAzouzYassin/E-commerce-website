@@ -66,6 +66,7 @@ export async function getLastWeekOrders() {
 
 export async function getLatestOrders() {
     const data = await prisma.order.findMany({
+        where: { status: "waiting" },
         orderBy: [{ createdAt: "desc" }],
         take: 5,
     });

@@ -1,7 +1,7 @@
 import { buildJsonSchemas } from "fastify-zod";
 import z from "zod";
 
-const ProductSchema = z.object({
+const CreateProductSchema = z.object({
     name: z.string(),
     description: z.string(),
     price: z.number(),
@@ -14,4 +14,4 @@ const ProductSchema = z.object({
     categoryId: z.string()
 })
 
-export const { $ref, schemas: productSchemas } = buildJsonSchemas({ ProductSchema }, { $id: "productSchemas" })
+export const { $ref, schemas: createProductSchema } = buildJsonSchemas({ CreateProductSchema }, { $id: "createProductSchema" })

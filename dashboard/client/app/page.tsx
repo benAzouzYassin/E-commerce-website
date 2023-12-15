@@ -13,18 +13,20 @@ import {
 
 } from "@/components/ui/tabs"
 import { WeekOverview } from "@/components/dashboard/WeekOverview"
-import { RecentSales } from "@/components/dashboard/recent-sales"
+import { RecentOrders } from "@/components/dashboard/recent-sales"
 
 import Nav from "@/components/Nav"
-import { DashboardDataRoute } from "@/types/apiTypes"
 import DashboardCard from "@/components/dashboard/DashboardCard"
-import CardPlaceholder from "@/components/dashboard/CardPlaceholder"
+import { DashboardData } from "@/types/backendDataTypes"
 
 export const metadata: Metadata = {
   title: "Dashboard",
 }
 
-async function getDashboardData(): Promise<DashboardDataRoute> {
+async function getDashboardData(): Promise<{
+  data: DashboardData | null,
+  error: string | null
+}> {
   "use server"
   const backendUrl = process.env["BACKEND_URL"]
   try {
@@ -85,11 +87,11 @@ export default async function DashboardPage() {
                   <CardHeader>
                     <CardTitle>Recent Orders</CardTitle>
                     <CardDescription>
-                      There is 265 order this month.
+                      New orders waiting for validation
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <RecentSales />
+                    <RecentOrders latestOrders={data?.latestOrders ?? []} />
                   </CardContent>
                 </Card>
               </div>
