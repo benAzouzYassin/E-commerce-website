@@ -18,23 +18,12 @@ import { RecentOrders } from "@/components/mainPage/RecentSales"
 import Nav from "@/components/Nav"
 import DashboardCard from "@/components/mainPage/DashboardCard"
 import { DashboardData } from "@/types/globalTypes"
+import { getDashboardData } from "@/actions/mainPageActions"
 
 export const metadata: Metadata = {
   title: "Dashboard",
 }
 
-async function getDashboardData(): Promise<{
-  data: DashboardData | null,
-  error: string | null
-}> {
-  "use server"
-  const backendUrl = process.env["BACKEND_URL"]
-  try {
-    return await ((await fetch(`${backendUrl}/dashboard/data`, { cache: "no-cache" })).json())
-  } catch (error: any) {
-    return { data: null, error: error.message }
-  }
-}
 
 export default async function DashboardPage() {
   const { data, error } = await getDashboardData()

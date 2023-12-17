@@ -1,6 +1,6 @@
 "use client"
 
-import { fetchAllOrders } from "@/actions/orders/ordersActions";
+import { fetchAllOrders } from "@/actions/ordersActions";
 import Nav from "@/components/Nav";
 import OrderRow from "@/components/orders/OrderRow";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";

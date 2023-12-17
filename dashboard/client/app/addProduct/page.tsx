@@ -6,56 +6,9 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Textarea } from "@/components/ui/textarea"
 import ImgField from "../../components/shared/ImgField"
 import CategorySelect from '../../components/shared/CategorySelect';
-import { uploadProductImage } from "@/utils/firebase"
-import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
+import { createNewProduct, fetchCategories } from "@/actions/addProductActions"
 
 
-
-async function createNewProduct(data: FormData) {
-    "use server"
-    const status = data.get("productStatus")?.toString() ?? ""
-    const category = data.get("productCategory")?.toString() ?? ""
-    const name = data.get("productName")?.toString() ?? ""
-    const description = data.get("productDescription")?.toString() ?? ""
-    const price = data.get("productPrice")?.toString() ?? ""
-    const salePrice = data.get("productSalePrice")?.toString() ?? ""
-    const stock = data.get("productStock")?.toString() ?? ""
-    const imgFile = data.get("productImg")
-    const imgLink = await uploadProductImage(imgFile)
-    const newProduct = {
-        additionalImages: [],
-        description: description,
-        imgLink: imgLink,
-        name: name,
-        price: Number(price),
-        orderTimes: 0,
-        salePrice: salePrice ? Number(salePrice) : 0,
-        status: status,
-        categoryId: category,
-        stock: Number(stock)
-    }
-    try {
-        const response = await axios.post(process.env["BACKEND_URL"] + "/product/createOne", newProduct)
-        console.log(response.data)
-    } catch (error: any) {
-        console.log({ data: null, error: error.message })
-    }
-    revalidatePath("/products")
-    redirect("/products")
-}
-
-
-
-async function fetchCategories() {
-    "use server"
-    const backendUrl = process.env["BACKEND_URL"]
-    try {
-        return await ((await fetch(`${backendUrl}/category/getAll`, { cache: "no-cache" })).json())
-    } catch (error: any) {
-        return { data: null, error: error.message }
-    }
-}
 
 
 

@@ -1,26 +1,8 @@
+import { fetchCategories, fetchProducts } from '@/actions/productsActions';
 import Nav from '../../components/Nav';
 import Products from '../../components/productsPage/Products';
 import { Category } from '@/types/globalTypes';
 
-async function fetchCategories() {
-    "use server"
-    const backendUrl = process.env["BACKEND_URL"]
-    try {
-        return await ((await fetch(`${backendUrl}/category/getAll`)).json())
-    } catch (error: any) {
-        return { data: null, error: error.message }
-    }
-}
-
-async function fetchProducts() {
-    "use server"
-    const backendUrl = process.env["BACKEND_URL"]
-    try {
-        return await ((await fetch(`${backendUrl}/product/getAll`)).json())
-    } catch (error: any) {
-        return { data: null, error: error.message }
-    }
-}
 
 export default async function Page() {
     const { data: products, error: productsErr } = await fetchProducts()
