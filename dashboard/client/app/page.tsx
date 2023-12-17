@@ -12,12 +12,12 @@ import {
   TabsContent,
 
 } from "@/components/ui/tabs"
-import { WeekOverview } from "@/components/dashboard/WeekOverview"
-import { RecentOrders } from "@/components/dashboard/recent-sales"
+import { WeekOverview } from "@/components/mainPage/WeekOverview"
+import { RecentOrders } from "@/components/mainPage/RecentSales"
 
 import Nav from "@/components/Nav"
-import DashboardCard from "@/components/dashboard/DashboardCard"
-import { DashboardData } from "@/types/backendDataTypes"
+import DashboardCard from "@/components/mainPage/DashboardCard"
+import { DashboardData } from "@/types/globalTypes"
 
 export const metadata: Metadata = {
   title: "Dashboard",

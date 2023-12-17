@@ -1,19 +1,20 @@
 import Fastify from "fastify";
-import { categoryRouter } from "./src/modules/category/category.router";
-import { createCategorySchema } from "./src/modules/category/category.schema";
-import { createProductSchema } from "./src/modules/product/product.schema";
-import { createOrderSchema } from "./src/modules/order/order.schema";
-import { productRouter } from "./src/modules/product/product.router";
-import { dashboardRouter } from "./src/modules/dashboard/dashboard.router"
+import { categoryRouter } from "./src/routes/category/category.router";
+import { createCategorySchemas } from "./src/routes/category/category.schema";
+import { createProductSchemas } from "./src/routes/product/product.schema";
+import { createOrderSchemas } from "./src/routes/order/order.schema";
+import { productRouter } from "./src/routes/product/product.router";
+import { dashboardRouter } from "./src/routes/dashboard/dashboard.router"
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from "@fastify/swagger-ui";
+import { orderRouter } from "./src/routes/order/order.router";
 import { prisma } from "./src/utils/prisma";
 
 const server = Fastify({
   logger: false,
 });
 
-for (const schema of [...createCategorySchema, ...createOrderSchema, ...createProductSchema]) {
+for (const schema of [...createCategorySchemas, ...createOrderSchemas, ...createProductSchemas]) {
   server.addSchema(schema)
 }
 
@@ -44,12 +45,11 @@ server.register(fastifySwaggerUi, swaggerUiOptions);
 server.register(categoryRouter, { prefix: "/category" })
 server.register(dashboardRouter, { prefix: "/dashboard" })
 server.register(productRouter, { prefix: "/product" })
+server.register(orderRouter, { prefix: "/order" })
 
-server.get("/", () => {
-  return { status: "working" }
-})
 async function start() {
-  const address = await server.listen({ port: 3001, host: "0.0.0.0" });
+  const address = await server.listen({ port: 5500, host: "0.0.0.0" });
+  console.log("server is live on ", address)
   server.swagger();
 }
 

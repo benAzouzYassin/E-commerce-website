@@ -25,7 +25,7 @@ model Product {
   orderTimes       Int
   salePrice        Decimal
   additionalImages String[]
-  status           String // "onSale" | "soldOut" | "hidden" | "comingSoon" | "published";
+  status           String // "on sale" | "sold out" | "hidden" | "coming soon" | "published";
   category Category @relation(fields: [categoryId], references: [id])
   categoryId String
   createdAt DateTime @default(now())
@@ -41,6 +41,7 @@ model Order {
   productId String
   createdAt DateTime @default(now())
   isDashboardHidden Boolean
+  location String
   status String // waiting | validated | sent | canceled
 }
 
