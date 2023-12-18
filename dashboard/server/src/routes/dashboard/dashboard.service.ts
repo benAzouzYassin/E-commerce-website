@@ -41,18 +41,26 @@ export async function getCanceledOrdersCount() {
     return data._count.status;
 }
 
+function getPast7DaysNames() {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const today = new Date();
+    const past7DaysObject = {};
+    for (let i = 6; i >= 0; i--) {
+      const pastDay = new Date(today);
+      pastDay.setDate(today.getDate() - i);
+      const dayName = daysOfWeek[pastDay.getDay()];
+      past7DaysObject[dayName] = 0;
+    }
+    return past7DaysObject;
+  }
+  
+
+
+
 export async function getLastWeekOrders() {
     // the day that before the current day with 7 days
     const startDay = new Date(new Date().getDate() - 7);
-    const results = {
-        Sunday: 0,
-        Monday: 0,
-        Tuesday: 0,
-        Wednesday: 0,
-        Thursday: 0,
-        Friday: 0,
-        Saturday: 0,
-    };
+    const results = getPast7DaysNames()
     //get last 7 days orders
     const ordersData = await prisma.order.findMany({
         where: {
