@@ -4,7 +4,7 @@ export async function fetchCategories() {
     try {
         return await ((await fetch(`${backendUrl}/category/getAll`)).json())
     } catch (error: any) {
-        return { data: null, error: error.message }
+        return { data: [], error: error.message }
     }
 }
 
@@ -13,6 +13,6 @@ export async function fetchProducts() {
     try {
         return await ((await fetch(`${backendUrl}/product/getAll`)).json())
     } catch (error: any) {
-        return { data: null, error: error.message }
+        return { data: [], error: error.message }
     }
 }

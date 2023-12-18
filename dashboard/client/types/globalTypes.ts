@@ -15,7 +15,7 @@ export type Order = {
     productId: string;
     createdAt: string;
     isDashboardHidden: boolean;
-    status: string;
+    status: "waiting" | "sent" | "canceled" | "validated";
     product? : Product
     location : string
 };

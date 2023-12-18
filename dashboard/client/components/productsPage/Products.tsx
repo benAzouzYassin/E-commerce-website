@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useState } from "react"
 import Categories from "./Categories"
 import Link from "next/link"
-import { Product } from "@/types/globalTypes"
+import { Product as ProductType } from "@/types/globalTypes"
 import { Search } from "lucide-react"
 import { Input } from "../ui/input"
+import Product from "./Product"
 
-export default function Products({ products, categories }: { products: Product[], categories: string[] }) {
+export default function Products({ products, categories }: { products: ProductType[], categories: string[] }) {
     const [selectedCategory, setSelectedCategory] = useState("All Products")
     const updateCategory = (category: string) => setSelectedCategory(category)
     const [visibleProducts, setVisibleProducts] = useState(products)
@@ -46,14 +47,8 @@ export default function Products({ products, categories }: { products: Product[]
         </div>
         <Categories categories={categories} selectNewCategory={updateCategory} selectedCategory={selectedCategory} />
         <div className="grid grid-cols-5 gap-7 mt-14">
-            {visibleProducts.map((product: any) => <Link href={`/updateProduct/${product.id}`} className="p-2 hover:cursor-pointer hover:scale-105 transition-transform rounded-sm  border-2 flex flex-col h-80" key={product.id}>
-                <div className="h-1/2 w-full relative p-1 ">
-                    <img className="max-w-[150px] max-h-[90%]  mx-auto" src={product.imgLink} alt={product.name + "image"} />
-                </div>
-                <p className="px-2 mt-auto font-bold line-clamp-1">{product.name}</p>
-                <p className="px-2 line-clamp-1"><span className="font-semibold">Price</span> : {product.price}</p>
-                <div className="mb-7 text-sm pl-2 line-clamp-1 px-2 mt-1"><span className="font-semibold">Stock :</span> {product.count} <span className="ml-10 font-semibold">Sold :</span> {product.orderTimes}</div>
-            </Link>)}
+            {visibleProducts.map((product: ProductType) => <Product key={product.id} {...product}/>)}
         </div>
     </div>
 }
+

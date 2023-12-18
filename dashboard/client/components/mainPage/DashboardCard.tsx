@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 type Props = {
     title: "Total Revenue" | "Orders" | "Canceled" | "Visits"
     description: string
-    data: string
+    data?: string
 }
 
 export default function DashboardCard(props: Props) {

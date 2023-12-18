@@ -1,18 +1,17 @@
+"use server";
 import { uploadProductImage } from "@/utils/firebase";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export
-async function fetchProduct(productId: string) {
-    "use server";
+export async function fetchProduct(productId: string) {
     try {
       const backendUrl =process.env["BACKEND_URL"] + "/product/getOneById/" + productId;
       const { data : response } = await axios.get(backendUrl)
       return response;
       
     } catch (error : any) {
-      return {data : null , error  : error.message}
+      return {data : {} , error  : error.message}
     }
   }
   
@@ -66,7 +65,6 @@ async function fetchProduct(productId: string) {
     const response = await axios.put(process.env["BACKEND_URL"] + "/product/updateOne/"+productId, updatedProduct)
       if(response.status !== 200) redirect("/updateError")  
       if(response.status === 200){
-      console.log(response)
       revalidatePath("/products")
       redirect("/products")    
       }
@@ -82,7 +80,7 @@ async function fetchProduct(productId: string) {
         await fetch(`${backendUrl}/category/getAll`, { cache: "no-cache" })
       ).json();
     } catch (error: any) {
-      return { data: null, error: error.message };
+      return { data: [], error: error.message };
     }
   }
   

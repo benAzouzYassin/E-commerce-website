@@ -45,6 +45,6 @@ export async function fetchCategories() {
     try {
         return await ((await fetch(`${backendUrl}/category/getAll`, { cache: "no-cache" })).json())
     } catch (error: any) {
-        return { data: null, error: error.message }
+        return { data: [], error: error.message }
     }
 }

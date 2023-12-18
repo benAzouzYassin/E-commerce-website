@@ -12,7 +12,7 @@ export async function getTotalRevenue() {
     const data = await prisma.order.aggregate({
         _sum: {
             orderPrice: true,
-        },
+        },where : {status : "sent"}
     });
     return data._sum.orderPrice;
 }
@@ -59,6 +59,7 @@ export async function getLastWeekOrders() {
             createdAt: {
                 gte: startDay,
             },
+            NOT : {status : "canceled"}
         },
     });
 
