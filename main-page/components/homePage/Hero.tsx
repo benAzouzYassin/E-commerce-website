@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Hero() {
     return (
         <>
-            <p className="text-center line-clamp-2 h-fit py-2  mt-32 font-bold text-7xl  z-50">
+            <p className="text-center line-clamp-2 h-fit py-2  mt-36 font-bold  text-7xl  z-50">
                 Welcome To{" "}
                 <span className=" font-black  bg-clip-text text-transparent bg-gradient-to-l from-amber-600 to-red-600">
                     StoreName
