@@ -16,3 +16,13 @@
   }
 }
 
+.item-card{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: all 0.2s ease; 
+  @apply rounded-md border-opacity-10   bg-gradient-to-br from-[#faf5ff] to-[#f7ebff] h-72
+}
+.item-card:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+  
+}
