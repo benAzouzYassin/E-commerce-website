@@ -1,3 +1,4 @@
+import { Product } from "@prisma/client";
 import Item from "./Item";
 // type Props = {
 //     name : string

@@ -3,13 +3,17 @@ import CategoryOverview from "@/components/homePage/CategoryOverview";
 import Nav from "@/components/shared/Nav";
 import { products } from "@/data";
 import Footer from "@/components/shared/Footer";
+// import { getProductsGroups } from "@/services/productService";
 
-export default function Home() {
+export default async function Home() {
+    // const productsGroups = await getProductsGroups()
+    // console.log(productsGroups)
     return (
         <main className="w-full relative flex-col z-10 bg-background flex opacity-100">
             <Nav className="fixed w-[75%] -translate-x-[50%]" />
             <Hero />
             <div className="flex  flex-col md:px-16 px-5 mt-24 lg:px-16">
+                {products.map((productGroup , index)=><CategoryOverview name="no name" key={index} products={products}/>)}
                 <CategoryOverview name="" products={products} />
                 <CategoryOverview name="Clothes" products={products} />
                 <CategoryOverview name="Electronics" products={products} />
