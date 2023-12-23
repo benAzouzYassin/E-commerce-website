@@ -23,7 +23,7 @@ export default function Cart() {
     return (
         <>
             <div
-                className="justify-self-end absolute right-7 bg-gradient-to-tr from-[#db6494] to-[#eeb626] py-2 text-white font-bold px-6 rounded-md active:scale-100 hover:scale-[103%] transition-transform flex items-center gap-1 group"
+                className="justify-self-end hover:cursor-pointer absolute right-7 bg-gradient-to-tr from-[#db6494] to-[#eeb626] py-2 text-white font-bold px-6 rounded-md active:scale-100 hover:scale-[103%] transition-transform flex items-center gap-1 group"
                 onClick={openCart}>
                 {" "}
                 View Cart
@@ -37,7 +37,7 @@ export default function Cart() {
                                 My Cart :
                             </SheetTitle>
                         </SheetHeader>
-                        {cartItems.length < 0 && (
+                        {cartItems.length <= 0 && (
                             <p className="text-center text-black/40 font-medium absolute top-1/2 text-xl w-full ">
                                 Cart is empty
                             </p>

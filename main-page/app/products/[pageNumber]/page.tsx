@@ -2,50 +2,61 @@ import Filters from "@/components/productsPage/Filters";
 import Nav from "@/components/shared/Nav";
 import { ArrowRight, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
 import Footer from "../../../components/shared/Footer";
 import { getDividedProducts } from "@/services/productService";
 import Item from "@/components/productsPage/Item";
 import { Product } from "@prisma/client";
 import Link from "next/link";
-
-// divides the products into smaller
+import SearchField from "@/components/productsPage/SearchFIeld";
 
 export const revalidate = 300; //revalidate cache every 5 minutes
 
 export default async function Products({
     params,
+    searchParams,
 }: {
     params: { pageNumber: string };
+    searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-    const products =await getDividedProducts();
     
     const pageNumber = parseInt(params.pageNumber);
+    const searchValue = searchParams?.["searchValue"]?.toString();
+    const category =  searchParams?.["category"]?.toString() ;
+    const price = searchParams?.["price"]?.toString();
+    const status = searchParams?.["status"]?.toString() ;
+
+    const products = await getDividedProducts(status ,category ,  price);
     const isValidPageNumber = pageNumber <= products.length;
+
+    //handle the searching of a product by name
+    const currentPageProducts = await products?.[pageNumber - 1];
+    const visibleProducts = searchValue
+        ? currentPageProducts?.filter((p: Product) =>
+              p.name.toLowerCase().startsWith(searchValue.toLowerCase())
+          )
+        : currentPageProducts;
     return (
-        <main className="w-full  h-fit relative flex-col z-10 bg-gradient-to-br from-amber-50 to-blue-50 flex opacity-100">
+        <main className="w-full min-h-[100vh] h-fit relative flex-col z-10 bg-gradient-to-br from-amber-50 to-blue-50 flex opacity-100">
             <Nav className="mx-auto" />
             <div className="flex flex-row px-36 h-full mt-36">
                 <Filters />
                 <div className="h-full  gap-5 flex-col w-full  flex ">
                     <div className="h-fit flex w-[90%] gap-1 ml-5 ">
-                        <div className="  relative flex items-center ">
-                            <Search className="absolute left-2  scale-110 stroke-foreground/70 " />
-                            <Input
-                                className="pl-8  outline-none focus:border-none focus:ring-0 bg-white"
-                                type="text"
-                                placeholder="search"
-                            />
-                        </div>
-                        <OtherPages products={products} currentPageNumber={pageNumber}/>
+                        <SearchField />
+                        <OtherPages
+                            products={products}
+                            currentPageNumber={pageNumber}
+                        />
                     </div>
                     {isValidPageNumber &&
-                        products?.[pageNumber - 1].map((product : Product) => {
-                            return <Item key={product.id} {...product} />
-                        }
-                        )}
+                        visibleProducts?.map((product: Product) => {
+                            return <Item key={product.id} {...product} />;
+                        })}
                     <div className="flex gap-1 w-[90%] ml-5 ">
-                    <OtherPages products={products} currentPageNumber={pageNumber}/>
+                        <OtherPages
+                            products={products}
+                            currentPageNumber={pageNumber}
+                        />
                     </div>
                 </div>
             </div>
@@ -87,23 +98,28 @@ function OtherPages({
         <>
             <div className="ml-auto flex gap-1">
                 {products.map((_, index) => (
-                    <Link 
-                        href={`/products/${index+1}`}
+                    <Link
+                        href={`/products/${index + 1}`}
                         key={index}
                         className={cn(
                             "h-8 w-8 flex items-center justify-center text-center font-bold rounded-md  border   text-black/90 border-black/20 shadow-black/20 shadow-sm ",
                             {
                                 "bg-[#C70A0A]": currentPageNumber === index + 1,
-                                " text-white/90": currentPageNumber === index + 1,
+                                " text-white/90":
+                                    currentPageNumber === index + 1,
                             }
                         )}>
                         {index + 1}
-                    </Link >
+                    </Link>
                 ))}
             </div>
-          {currentPageNumber !== products.length &&  <Link href={`/products/${currentPageNumber + 1}`} className="h-8 w-8 flex items-center justify-center text-center font-bold rounded-md  border   text-black/90 border-black/20 shadow-black/20 shadow-sm ">
-                <ArrowRight />
-            </Link>}
+            {currentPageNumber !== products.length && (
+                <Link
+                    href={`/products/${currentPageNumber + 1}`}
+                    className="h-8 w-8 flex items-center justify-center text-center font-bold rounded-md  border   text-black/90 border-black/20 shadow-black/20 shadow-sm ">
+                    <ArrowRight />
+                </Link>
+            )}
         </>
     );
 }
