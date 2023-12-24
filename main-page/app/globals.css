@@ -79,3 +79,6 @@
   display: grid;
   grid-auto-columns: 100px;
 }
+.custom-text-shadow {
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}

@@ -1,13 +1,13 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
-import { Product } from "@prisma/client";
+import { ProductType } from "@/services/productService";
 
 export type CartItemType = {
     cartQuantity: number;
-} & Product;
+} & ProductType;
 
 type ContextType = {
-    addItem: (product: Product) => void;
+    addItem: (product: ProductType) => void;
     removeOneItem: (id: string) => void;
     removeAllItems: () => void;
     removeItemAllQuantity: (id: string) => void
@@ -37,7 +37,7 @@ export function CartContextProvider({ children }: { children: React.ReactNode}) 
     const openCart =()=> setIsCartOpen(true)
     const closeCart =()=> setIsCartOpen(false)
     
-    const addItem = (product: Product) => {
+    const addItem = (product: ProductType) => {
         const indexInCart = getItemIndex(product.id, cartItems);
         const exists = indexInCart !== -1;
         console.log(exists);

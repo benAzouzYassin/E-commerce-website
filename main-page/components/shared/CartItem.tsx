@@ -6,7 +6,7 @@ export default function CartItem(props : CartItemType ) {
 
     return (
         <>
-            <div className="flex h-20 translate-x-[5%] shadow-sm shadow-black/10 border w-[90%]  rounded-md p-2">
+            <div className="flex h-20 translate-x-[5%] shadow-sm shadow-black/10 border w-[90%]  rounded-md  p-2">
                 <img
                     src={props.imgLink}
                     className="h-full w-20"

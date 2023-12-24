@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartContextProvider } from "@/context/CartContext";
-// const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -15,9 +15,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" className={inter.className}>
             <CartContextProvider>
-                <body className="font-sans">{children}</body>
+                <body >{children}</body>
             </CartContextProvider>
         </html>
     );

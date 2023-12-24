@@ -10,6 +10,7 @@ import {
 import { useCartContext } from "@/context/CartContext";
 import { ShoppingCart } from "lucide-react";
 import CartItem from "./CartItem";
+import Link from "next/link";
 
 export default function Cart() {
     const { cartItems, isCartOpen, openCart, removeAllItems, toggleCart } =
@@ -48,14 +49,14 @@ export default function Cart() {
                             ))}
                         </div>
                         <div className="flex flex-col w-full gap-2 absolute bottom-5">
-                            <button
-                                onClick={handleOrderItems}
-                                className="font-medium  bg-black text-white w-[90%]  hover:bg-white hover:text-black transition-colors duration-300  ease-in-out hover:border-opacity-100 border-2 border-opacity-0 rounded-sm py-2 ml-[10%] -translate-x-[5%] ">
+                            <Link
+                                href={"/ordering"}
+                                className="font-medium text-center bg-black text-white w-[90%]  hover:bg-white hover:text-black transition-colors duration-300  ease-in-out hover:border-opacity-100 border-2 border-opacity-0 rounded-sm py-2 ml-[10%] -translate-x-[5%] ">
                                 Order Now
-                            </button>
-                            <button className=" rounded-sm font-medium  w-[90%] bg-white text-black/70  hover:bg-black hover:text-white transition-colors duration-300 ease-in-out  border shadow-sm   py-2 ml-[10%] -translate-x-[5%] ">
+                            </Link>
+                            {/* <button className=" rounded-sm font-medium  w-[90%] bg-white text-black/70  hover:bg-black hover:text-white transition-colors duration-300 ease-in-out  border shadow-sm   py-2 ml-[10%] -translate-x-[5%] ">
                                 Continue Shopping
-                            </button>
+                            </button> */}
                         </div>
                     </SheetContent>
                 </Sheet>
