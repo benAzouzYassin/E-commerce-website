@@ -18,6 +18,7 @@ export type Order = {
     status: "waiting" | "sent" | "canceled" | "validated";
     product? : Product
     location : string
+    productQuantity : number
 };
 
 export type Category = {

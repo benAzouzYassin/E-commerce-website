@@ -35,7 +35,8 @@ export async function createOne(order:CreateOrderType) {
         userContact: order.userContact,
         userName: order.userName,
         productId: order.productId,
-        location : order.location
+        location : order.location,
+        productQuantity : 0
       },
     });
     

@@ -63,11 +63,9 @@ export default  function Page() {
                     </SelectGroup>
                 </Select>
             </div>
-
-
             <table className=" w-[80vw]">
                 <tbody className="relative overflow-scroll ">
-                    <tr className="font-medium bg-slate-200 px-5 text-center py-1 rounded-full dark:bg-slate-800 flex mt-10"><th className="w-[15vw]">Product</th><th className="w-[15vw]">Customer</th><th className="w-[15vw]">Contact</th><th className="w-[15vw]">Location</th><th className="w-[15vw]">Date</th><th className="w-[15vw]">Status</th></tr>
+                    <tr className="font-medium bg-slate-200 px-5 text-center py-1 rounded-full dark:bg-slate-800 flex mt-10"><th className="w-[12vw]">Product</th><th className="w-[12vw]">Customer</th><th className="w-[12vw]">Contact</th><th className="w-[12vw]">Location</th> <th className="w-[12vw]">Quantity</th><th className="w-[12vw]">Date</th><th className="w-[12vw]">Status</th></tr>
                     {visibleOrders.map(order=><OrderRow key={order.id} order={order}/>)}
                 </tbody>
             </table>

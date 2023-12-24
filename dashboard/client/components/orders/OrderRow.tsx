@@ -37,11 +37,12 @@ export default function OrderRow({ order }: { order: Order }) {
                     {order.product?.name}
                 </span>
             </td>
-            <td className="w-[15vw]">{order.userName}</td>
-            <td className="w-[15vw]">{order.userContact}</td>
-            <td className="w-[15vw]">{order.location}</td>
-            <td className="w-[15vw]">{order?.createdAt?.split("T")[0]}</td>
-            <td className="w-[15vw] text-black">
+            <td className="w-[12vw]">{order.userName}</td>
+            <td className="w-[12vw]">{order.userContact}</td>
+            <td className="w-[12vw]">{order.location}</td>
+            <td className="w-[12vw]">{order.productQuantity}</td>
+            <td className="w-[12vw]">{order?.createdAt?.split("T")[0]}</td>
+            <td className="w-[12vw] text-black">
                 <Select onValueChange={(value)=>{
                     setVisibleStatus(value)
                     setStatus(value)

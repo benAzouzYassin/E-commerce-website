@@ -43,6 +43,7 @@ model Order {
   isDashboardHidden Boolean
   location String
   status String // waiting | validated | sent | canceled
+  productQuantity   Int
 }
 
 
