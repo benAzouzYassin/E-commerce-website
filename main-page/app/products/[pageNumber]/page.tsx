@@ -1,13 +1,17 @@
 import Filters from "@/components/productsPage/Filters";
 import Nav from "@/components/shared/Nav";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Footer from "../../../components/shared/Footer";
-import { getDividedProducts } from "@/services/productService";
+import { ProductType, getDividedProducts } from "@/services/productService";
 import Item from "@/components/productsPage/Item";
-import { Product } from "@prisma/client";
 import Link from "next/link";
 import SearchField from "@/components/productsPage/SearchFIeld";
+
+
+export const metadata = {
+    title: "products",
+};
 
 export const revalidate = 300; //revalidate cache every 5 minutes
 
@@ -31,14 +35,14 @@ export default async function Products({
     //handle the searching of a product by name
     const currentPageProducts = await products?.[pageNumber - 1];
     const visibleProducts = searchValue
-        ? currentPageProducts?.filter((p: Product) =>
+        ? currentPageProducts?.filter((p: ProductType) =>
               p.name.toLowerCase().startsWith(searchValue.toLowerCase())
           )
         : currentPageProducts;
     return (
-        <main className="w-full min-h-[100vh] h-fit relative flex-col z-10 bg-gradient-to-br from-amber-50 to-blue-50 flex opacity-100">
+        <main className="w-full min-h-[100vh] h-fit relative  flex-col z-10 bg-[#fafafa] flex opacity-100">
             <Nav className="mx-auto" />
-            <div className="flex flex-row px-36 h-full mt-36">
+            <div className="flex flex-row px-36 h-full mt-36 pb-20">
                 <Filters />
                 <div className="h-full  gap-5 flex-col w-full  flex ">
                     <div className="h-fit flex w-[90%] gap-1 ml-5 ">
@@ -49,7 +53,7 @@ export default async function Products({
                         />
                     </div>
                     {isValidPageNumber &&
-                        visibleProducts?.map((product: Product) => {
+                        visibleProducts?.map((product: ProductType) => {
                             return <Item key={product.id} {...product} />;
                         })}
                     <div className="flex gap-1 w-[90%] ml-5 ">
@@ -91,7 +95,7 @@ function OtherPages({
     products,
     currentPageNumber,
 }: {
-    products: Array<Product[]>;
+    products: Array<ProductType[]>;
     currentPageNumber: number;
 }) {
     return (

@@ -1,6 +1,13 @@
 import Nav from "@/components/shared/Nav";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+
+export const metadata: Metadata = {
+    title: "About us",
+};
+
 export default function Page() {
     return (
         <main className="flex flex-col">

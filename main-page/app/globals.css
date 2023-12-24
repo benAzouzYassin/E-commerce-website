@@ -82,3 +82,16 @@
 .custom-text-shadow {
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
+
+@keyframes rotateSpinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: rotateSpinner 1s linear infinite;
+}

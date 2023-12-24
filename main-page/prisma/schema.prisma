@@ -23,6 +23,7 @@ model Order {
   status            String
   userContact       String
   location          String
+  productQuantity   Int
   Product           Product  @relation(fields: [productId], references: [id])
 }
 
