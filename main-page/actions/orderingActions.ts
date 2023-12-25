@@ -2,9 +2,6 @@
 
 import { prisma } from "@/utils/prisma"
 
-
-//TODO optimize this
-
 type OrderActionType = {
     userName: string,
     products: { productId: string, quantity: number }[],

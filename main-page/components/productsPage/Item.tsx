@@ -3,7 +3,7 @@ import AddToCartBtn from "./AddToCartBtn";
 type Props = {} & ProductType;
 export default function Item(props: Props) {
     return (
-        <div className="border w-[90%] ml-5 bg-white shadow-sm shadow-black/10  flex p-3 rounded-md">
+        <div className="border w-full lg:w-[90%] lg:ml-5 bg-white shadow-sm shadow-black/10  flex p-3 rounded-md">
             <img src={props.imgLink} alt="" className="w-28" />
             <div className="ml-4 flex w-full flex-col px-5">
                 <p className="font-bold text-2xl">{props.name}</p>

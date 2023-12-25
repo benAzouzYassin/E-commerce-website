@@ -41,11 +41,11 @@ export default async function Products({
         : currentPageProducts;
     return (
         <main className="w-full min-h-[100vh] h-fit relative  flex-col z-10 bg-[#fafafa] flex opacity-100">
-            <Nav className="mx-auto" />
-            <div className="flex flex-row px-36 h-full mt-36 pb-20">
+            <Nav animate={false} className="mx-auto" />
+            <div className="flex flex-row px-4 lg:px-20 h-full mt-36 pb-20">
                 <Filters />
                 <div className="h-full  gap-5 flex-col w-full  flex ">
-                    <div className="h-fit flex w-[90%] gap-1 ml-5 ">
+                    <div className="h-fit flex lg:w-[90%] lg:ml-5 ">
                         <SearchField />
                         <OtherPages
                             products={products}
@@ -65,31 +65,11 @@ export default async function Products({
                 </div>
             </div>
 
-            <Footer />
+            {/* <Footer /> */}
         </main>
     );
 }
 
-function OtherPageButton({
-    number,
-    className,
-    selected,
-}: {
-    number: number;
-    className?: string;
-    selected?: boolean;
-}) {
-    return (
-        <span
-            className={cn(
-                "h-8 w-8 flex items-center justify-center text-center font-bold rounded-md  border   text-black/90 border-black/20 shadow-black/20 shadow-sm ",
-                className,
-                { "bg-[#C70A0A]": selected, " text-white/90": selected }
-            )}>
-            {number}
-        </span>
-    );
-}
 
 function OtherPages({
     products,
@@ -120,7 +100,7 @@ function OtherPages({
             {currentPageNumber !== products.length && (
                 <Link
                     href={`/products/${currentPageNumber + 1}`}
-                    className="h-8 w-8 flex items-center justify-center text-center font-bold rounded-md  border   text-black/90 border-black/20 shadow-black/20 shadow-sm ">
+                    className=" ml-1 h-8 w-8 flex items-center justify-center text-center font-bold rounded-md  border   text-black/90 border-black/20 shadow-black/20 shadow-sm ">
                     <ArrowRight />
                 </Link>
             )}

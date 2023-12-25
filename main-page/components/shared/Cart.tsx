@@ -11,20 +11,14 @@ import { useCartContext } from "@/context/CartContext";
 import { ShoppingCart } from "lucide-react";
 import CartItem from "./CartItem";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export default function Cart() {
-    const { cartItems, isCartOpen, openCart, removeAllItems, toggleCart } =
-        useCartContext();
-
-    const handleOrderItems = () => {
-        //TODO ordering logic
-        removeAllItems();
-    };
-
+export default function Cart( {className } : {className? : string}) {
+    const { cartItems, isCartOpen, openCart} = useCartContext();
     return (
         <>
             <div
-                className="justify-self-end hover:cursor-pointer absolute right-7 bg-gradient-to-tr from-[#db6494] to-[#eeb626] py-2 text-white font-bold px-6 rounded-md active:scale-100 hover:scale-[103%] transition-transform flex items-center gap-1 group"
+                className={cn("justify-self-end hover:cursor-pointer absolute right-7 bg-gradient-to-tr from-[#db6494] to-[#eeb626] py-2 text-white font-bold px-6 rounded-md active:scale-100 hover:scale-[103%] transition-transform flex items-center gap-1 group" , className)}
                 onClick={openCart}>
                 {" "}
                 View Cart
@@ -54,9 +48,6 @@ export default function Cart() {
                                 className="font-medium text-center bg-black text-white w-[90%]  hover:bg-white hover:text-black transition-colors duration-300  ease-in-out hover:border-opacity-100 border-2 border-opacity-0 rounded-sm py-2 ml-[10%] -translate-x-[5%] ">
                                 Order Now
                             </Link>
-                            {/* <button className=" rounded-sm font-medium  w-[90%] bg-white text-black/70  hover:bg-black hover:text-white transition-colors duration-300 ease-in-out  border shadow-sm   py-2 ml-[10%] -translate-x-[5%] ">
-                                Continue Shopping
-                            </button> */}
                         </div>
                     </SheetContent>
                 </Sheet>

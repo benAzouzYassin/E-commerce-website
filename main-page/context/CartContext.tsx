@@ -100,4 +100,3 @@ export function useCartContext() {
     }
     return context;
 }
-//TODO function for update quantity

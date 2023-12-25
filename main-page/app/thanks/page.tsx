@@ -8,11 +8,10 @@ export const metadata = {
 
 export default async function Page() {
     return <main className="flex h-[70vh]">
-        <Nav className="fixed w-[75%] -translate-x-[50%]" />
-        <section className="flex w-full h-full flex-col mt-[15vh]">
+        <section className="flex w-full h-full flex-col xl:mt-[15vh] mt-[12vh]">
             <Check width={300} height={300} className=" stroke-[#37bd54]/80 mx-auto" />
             <p className="text-7xl text-center font-bold text-black/70 mx-auto -mt-8 self-center ">Thank You !</p>
-            <p className="w-1/2 text-center mx-auto mt-4">
+            <p className="xl:w-1/2 w-3/4 text-center mx-auto mt-4">
                 Thank you for choosing <strong>Hg Store</strong>! Your order is sent, and we&apos;re
                 thrilled to have you as our valued customer. Your order will be delivered within <strong>24h to 48h</strong></p>
             <Link

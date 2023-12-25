@@ -25,7 +25,7 @@ export default function Filters() {
         addUrlParams({key : selectedName , "value" : selectedValue})
     };
     return (
-        <aside className=" w-[25%] shadow-sm  shadow-black/10 backdrop-brightness-150 p-4 h-fit rounded-sm">
+        <aside className=" lg:w-[30%] md:w-[35%] shadow-sm hidden  lg:block shadow-black/10 backdrop-brightness-150 p-4 h-fit rounded-sm">
             <p className="font-bold text-stone-700 text-3xl mb-5 ">
                 Filter Products
             </p>

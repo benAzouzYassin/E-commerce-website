@@ -11,17 +11,17 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <main className="flex flex-col">
-            <Nav className="w-3/4 mx-auto" />
-            <section className="px-48 mt-20 flex">
+            <Nav animate={false} className="w-[80%] mx-auto" />
+            <section className="px-5 sm:px-10 lg:px-28 mt-40 xl:mt-20 flex">
                 <div >
                     <h2 className="text-2xl font-mono tracking-wider font-bold text-neutral-500">
                         About us
                     </h2>
-                    <p className=" font-bold text-4xl  w-[90%]">
+                    <p className=" font-bold text-3xl xl:text-4xl ">
                         we believe in providing a seamless and enjoyable
                         shopping experience.
                     </p>
-                    <p className=" ml-1 w-[65%] mb-7 font-medium text-sm text-neutral-500 mt-4 custom-text-shadow ">
+                    <p className=" ml-1 xl:w-[80%] mb-7 font-medium text-sm text-neutral-500 mt-4 custom-text-shadow ">
                         HG-STORE is more than just an online store; we are a
                         community of like-minded individuals who share a love
                         for quality products and a commitment to making shopping
@@ -38,9 +38,9 @@ export default function Page() {
                 <Image
                     src="/about-page-img.svg"
                     alt=""
-                    width={700}
-                    height={700}
-                    className=""
+                    width={650}
+                    height={650}
+                    className="hidden xl:block lg:w-96 2xl:w-[650px]"
                 />
             </section>
         </main>

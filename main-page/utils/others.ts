@@ -14,3 +14,8 @@ export function scrollToElement(elementId : string) {
 export function serializeData(object : unknown) {
         return JSON.parse(JSON.stringify(object))
 }
+export function isLargeScreen() {
+    const largeScreenThreshold = 1024;
+
+    return window.innerWidth >= largeScreenThreshold;
+}

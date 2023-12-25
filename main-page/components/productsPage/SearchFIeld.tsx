@@ -19,11 +19,11 @@ export default function SearchField() {
     }
     return (
         <form onSubmit={handleSubmit} className="relative flex items-center ">
-            <Search className="absolute left-2  scale-110 stroke-foreground/70 " />
+            <Search className="absolute left-2 scale-110 stroke-foreground/70 " />
             <Input
                 value={searchValue}
                 onChange={(e)=>setSearchValue(e.target.value)}
-                className="pl-8  outline-none focus:border-none focus:ring-0 bg-white"
+                className="pl-8 w-[90%] lg:w-auto outline-none focus:border-none focus:ring-0 bg-white"
                 type="text"
                 placeholder="search"
             />

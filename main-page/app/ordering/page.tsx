@@ -8,11 +8,9 @@ import { OrderItems } from "@/actions/orderingActions";
 import { Loader2Icon } from "lucide-react"
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from 'sonner';
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-    title: "Ordering",
-};
+import { AnimatePresence, motion } from "framer-motion";
+import {ShoppingCart ,X} from "lucide-react"
+import { isLargeScreen } from "@/utils/others";
 
 export default function Page() {
     const [userName, setUserName] = useState("");
@@ -20,8 +18,10 @@ export default function Page() {
     const [address, setAddress] = useState("");
     const [formError, setFormError] = useState({ userNameField: "", addressField: "", phoneNumberField: "" })
     const [isLoading, setIsLoading] = useState(false)
+    const [isCartVisible, setIsCartVisible] = useState(isLargeScreen())
+    //handling phone animations
 
-    const { cartItems , removeAllItems } = useCartContext();
+    const { cartItems, removeAllItems } = useCartContext();
     const router = useRouter()
 
     const price = cartItems.reduce((acc, curr) => {
@@ -70,7 +70,7 @@ export default function Page() {
                 }).catch(err => {
                     console.error(err)
                     setIsLoading(false)
-                    toast.error("something went wrong !" , {duration : 200 })
+                    toast.error("something went wrong !", { duration: 200 })
                 })
             setIsLoading(true)
         }
@@ -78,14 +78,12 @@ export default function Page() {
     };
 
     return (
-        <main className="bg-white h-[100vh]">
-            <p className=" absolute w-full text-center text-3xl font-black text-black/80"></p>
-            <section className=" relative flex">
-                <div className=" w-3/4 px-72">
-                    <p className="w-full text-3xl font-black text-center mt-4">
-                        HG STORE
-                    </p>
-                    <form onSubmit={handleSubmit} className="mt-20 flex flex-col gap-3">
+        <main className="bg-white h-[100vh]  w-[100vw] ">
+            <section className=" relative flex  ">
+                <div className="w-full px-10 xl:px-96">
+                        <ShoppingCart className="scale-150 absolute right-7 top-5" onClick={() => setIsCartVisible(!isCartVisible)}/>
+                        <p className="absolute font-bold left-1/2 -translate-x-1/2 xl:text-3xl  text-xl  text-center w-full top-14">Completing your order </p>
+                    <form onSubmit={handleSubmit} className="mt-24 xl:mt-36 flex flex-col gap-3">
                         <label className="font-bold text-md">
                             Name
                             <span className="font-black text-red-500/80">
@@ -138,33 +136,41 @@ export default function Page() {
 
                     </form>
                 </div>
-                <article className=" px-5  relative w-1/4 h-[100vh] bg-[#ffffff] border-2">
-                    <p className="font-bold absolute top-20 ">
-                        Purchase summary ({cartItems.length})
-                    </p>
-                    <div className="flex flex-col absolute  top-36 w-[90%] gap-4">
-                        {cartItems.map((item) => (
-                            <CartItem key={item.id} {...item} />
-                        ))}
-                    </div>
-                    <p className="flex  absolute bottom-20 w-[90%] font-bold">
-                        Subtotal
-                        <span className="font-medium ml-auto mr-5 ">
-                            {price}$
-                        </span>
-                    </p>
-                    <p className="flex  absolute bottom-10 w-[90%] font-bold items-center gap-2">
-                        Total
-                        <span className="text-xs font-medium text-neutral-400 ">
-                            ({deliveryPrice}$ delivery)
-                        </span>
-                        <span className="font-medium ml-auto mr-5 ">
-                            {price ? price + deliveryPrice : 0}$
-                        </span>
-                    </p>
-                </article>
+                 
+              <AnimatePresence> 
+                    {isCartVisible && <motion.div initial={{ opacity: 0, x: 500 }} exit={{ opacity: 0, x: 500 }} transition={{ duration: 0.3, bounce: false, type: "keyframes" }} animate={{ opacity: 1, x: 0 }} className="absolute w-[85%] xl:w-96 lg:w-1/2 right-0" >
+
+                        <article className="  border-black z-50 px-5  h-[100vh] bg-[#ffffff] border-2">
+                            <X className="stroke-3 scale-150 absolute right-5 top-5" onClick={()=>setIsCartVisible(false)} />
+                            <p className="font-bold absolute top-20 ">
+                                Purchase summary ({cartItems.length})
+                            </p>
+                            <div className="flex flex-col absolute  top-36 w-[90%] gap-4">
+                                {cartItems.map((item) => (
+                                    <CartItem key={item.id} {...item} />
+                                ))}
+                            </div>
+                            <p className="flex  absolute bottom-20 w-[90%] font-bold">
+                                Subtotal
+                                <span className="font-medium ml-auto mr-5 ">
+                                    {price}$
+                                </span>
+                            </p>
+                            <p className="flex  absolute bottom-10 w-[90%] font-bold items-center gap-2">
+                                Total
+                                <span className="text-xs font-medium text-neutral-400 ">
+                                    ({deliveryPrice}$ delivery)
+                                </span>
+                                <span className="font-medium ml-auto mr-5 ">
+                                    {price ? price + deliveryPrice : 0}$
+                                </span>
+                            </p>
+                        </article>
+                    </motion.div>}
+                </AnimatePresence>
+
             </section>
-            <Toaster theme="light"   richColors={true} />
+            <Toaster theme="light" richColors={true} />
         </main>
     );
 }
