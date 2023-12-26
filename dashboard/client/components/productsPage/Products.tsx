@@ -2,11 +2,11 @@
 "use client"
 import { useCallback, useEffect, useState } from "react"
 import Categories from "./Categories"
-import Link from "next/link"
 import { Product as ProductType } from "@/types/globalTypes"
 import { Search } from "lucide-react"
 import { Input } from "../ui/input"
 import Product from "./Product"
+import AddProductBtn from "./AddProductBtn"
 
 export default function Products({ products, categories }: { products: ProductType[], categories: string[] }) {
     const [selectedCategory, setSelectedCategory] = useState("All Products")
@@ -41,9 +41,7 @@ export default function Products({ products, categories }: { products: ProductTy
                 <Search className='absolute left-2 scale-110 stroke-foreground/70 ' />
                 <Input value={searchInput} onChange={(e) => setSearchInput(e.target.value)} className='pl-8' type='text' placeholder='search product' />
             </div>
-            <button className=" ml-10 border-2 px-3 rounded-md dark:font-normal font-medium border-foreground   before:ease relative  overflow-hidden py-2   transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-foreground before:opacity-10 before:duration-700  hover:before:-translate-x-40">
-                <Link href={"/addProduct"} className="relative z-10">Add new product +</Link>
-            </button>
+            <AddProductBtn/>
         </div>
         <Categories categories={categories} selectNewCategory={updateCategory} selectedCategory={selectedCategory} />
         <div className="grid grid-cols-5 gap-7 mt-14">

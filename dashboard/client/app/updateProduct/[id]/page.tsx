@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className=" w-full h-72  border-2 rounded-xl hover:cursor-pointer">
             <div className=" relative bg-accent-foreground/5 h-[220px] hover:bg-accent-foreground/10 transition-colors mx-auto mt-3 text-8xl text-foreground/50 text-center w-[90%] flex items-center justify-center border-foreground/50 border-2 border-dashed">
               <span className="absolute">+</span>
-              <ImgField defaultUrl={productData?.imgLink ?? ""} />
+              <ImgField required={false}   defaultUrl={productData?.imgLink ?? ""} />
             </div>
             <p className="ml-4 mt-3 font-medium line-clamp-2 pr-3"></p>
           </div>

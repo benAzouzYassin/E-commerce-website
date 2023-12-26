@@ -16,7 +16,13 @@ export async function OrderItems(data: OrderActionType) {
     try {
         const orders = []
         for (const { productId, quantity } of data.products) {
+            
             const product = await prisma.product.findFirst({ where: { id: productId } })
+            if (product) {
+                
+                const newStock =  product.stock - quantity  
+                const updateRes  = await prisma.product.update({ data:{stock : newStock}, where : {id : productId}})
+            }
             if (!product) throw new Error("Wrong product id in trace : actions/orderingActions.ts on line 20!")
             const orderData = {
                 isDashboardHidden: false,

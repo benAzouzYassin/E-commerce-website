@@ -4,10 +4,22 @@ import Nav from "@/components/shared/Nav";
 import Footer from "@/components/shared/Footer";
 import { getProductsGroupedByCategories } from '@/services/productService';
 import BestSellers from "@/components/homePage/BestSellers";
+import { prisma } from "@/utils/prisma";
+
+async function registerVisit() {
+    "use server"
+    try {
+        await prisma.visits.create({data :{id : crypto.randomUUID()}})
+
+    } catch (error) {
+    console.log("error while creating new visit")        
+    }
+}
 
 
 export default async function Home() {
     const productGroups   = await getProductsGroupedByCategories()
+     await registerVisit()
     return (<>
         <main className="w-full px-2 relative flex-col z-10 bg-background pb-36 flex opacity-100 overflow-x-hidden">
             <Nav animate={true} className=" w-[80%] mx-auto" />

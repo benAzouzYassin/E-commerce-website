@@ -42,7 +42,7 @@ export default function CategorySelect({ savedCategories , defaultCategory }: { 
     return <div>
         {/**readOnly fields are used to pass required data to the form actions */}
         <input name="productCategory" type="text" className="hidden" readOnly value={selectedOptionId} />
-        <input name="visible" placeholder="Select or type a category" className="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50  w-full" onBlur={handleBlur} onFocus={() => setIsTyping(true)} type="text" value={textInput} onChange={handleTextInputChange} onKeyDown={handleKeyDown} />
+        <input autoComplete="off" required name="visible" placeholder="Select or type a category" className="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50  w-full" onBlur={handleBlur} onFocus={() => setIsTyping(true)} type="text" value={textInput} onChange={handleTextInputChange} onKeyDown={handleKeyDown} />
         {isTyping &&
             <ul className="shadow-md animate-in  fade-in-0 zoom-in-95 slide-in-from-top-2 relative  mt-3 max-h-96 min-w-[8rem] overflow-hidden rounded-md border  text-popover-foreground ">
                 {visibleOptions.map(opt => <li onClick={() => handleOptionClick(opt)} className={cn(

@@ -6,6 +6,7 @@ import axios from "axios"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
+
 export async function createNewProduct(data: FormData) {
     const status = data.get("productStatus")?.toString() ?? ""
     const category = data.get("productCategory")?.toString() ?? ""
@@ -15,6 +16,8 @@ export async function createNewProduct(data: FormData) {
     const salePrice = data.get("productSalePrice")?.toString() ?? ""
     const stock = data.get("productStock")?.toString() ?? ""
     const imgFile = data.get("productImg")
+   
+    
     const imgLink = await uploadProductImage(imgFile)
     const newProduct = {
         additionalImages: [],
@@ -30,9 +33,8 @@ export async function createNewProduct(data: FormData) {
     }
     try {
         const response = await axios.post(process.env["BACKEND_URL"] + "/product/createOne", newProduct)
-        console.log(response.data)
+        
     } catch (error: any) {
-        console.log({ data: null, error: error.message })
     }
     revalidatePath("/products")
     redirect("/products")

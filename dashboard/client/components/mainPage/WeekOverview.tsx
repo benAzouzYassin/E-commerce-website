@@ -7,7 +7,6 @@ export function WeekOverview({ weekData }: { weekData: any }) {
     const [chartData, setChartData] = useState<{ name: any; total: any }[]>([])
     useEffect(() => {
         if (weekData) {
-            console.log(weekData)
             const finalData = []
             for (const day in weekData) {
                 finalData.push({ name: day, total: weekData[day] })

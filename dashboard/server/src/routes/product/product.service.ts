@@ -3,7 +3,7 @@ import { CreateProductBody } from "./product.schema";
 
 export async function getAllProducts() {
     try {
-        const data = await prisma.product.findMany({ include: { category: true } })
+        const data = await prisma.product.findMany({ include: { category: true } , where : {NOT : {status : "deleted"}} })
         return { data: data, statusCode: 200, error: null }
     } catch (error) {
         return { data: null, statusCode: 500, error: error.message }
@@ -88,5 +88,13 @@ export async function updateProduct(productData: CreateProductBody , productId :
     } catch (error) {
         return { data: null, error: error.message }
 
+    }
+}
+export async function deleteProduct(id : string) {
+    try {
+        const data = await prisma.product.update( {data : {stock : 0 ,  status : "deleted" }, where : {id : id }} )
+        return { data: data, statusCode: 200, error: null }
+    } catch (error) {
+        return { data: null, statusCode: 500, error: error.message }
     }
 }

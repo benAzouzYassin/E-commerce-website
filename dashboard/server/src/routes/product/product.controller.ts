@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createNewProduct, getAllProducts, getProductById, updateProduct } from "./product.service";
+import { createNewProduct, deleteProduct, getAllProducts, getProductById, updateProduct } from "./product.service";
 import { CreateProductBody } from "./product.schema";
 
 export async function getAllHandler(req: FastifyRequest, reply: FastifyReply) {
@@ -25,4 +25,9 @@ export async function updateOneHandler(req: FastifyRequest, reply: FastifyReply)
     const id = req.params["id"]
     const updateResult = await updateProduct(updateData , id)
     reply.status(updateResult.error != null ? 500 : 200).send(updateResult)
+}
+export async function deleteOneHandler(req: FastifyRequest, reply: FastifyReply) {
+    const id = req.params["id"]
+    const deleteResult = await deleteProduct(id) 
+    reply.send(deleteResult)
 }

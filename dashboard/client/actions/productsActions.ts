@@ -16,3 +16,12 @@ export async function fetchProducts() {
         return { data: [], error: error.message }
     }
 }
+
+export async function deleteProduct(productId : string) {
+    const backendUrl = process.env["BACKEND_URL"]
+    try {
+        return await ((await fetch(`${backendUrl}/product/delete/${productId}` , {method : "delete"})).json())
+    } catch (error: any) {
+        return { data: [], error: error.message }
+    }
+}

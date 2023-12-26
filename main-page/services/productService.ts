@@ -28,7 +28,8 @@ export const getDividedProducts = cache(async (status?: string, category?: strin
     const categoryCondition = category ?  {categoryId: category } : {}
     const priceRange = price ? price.split("-") : []
     const priceCondition = price ? {price : {in:  priceRange }}: {}  
-    const where= { where: { ...statusCondition, ...categoryCondition, ...priceCondition } };
+    const stockCondition = {stock : {gt : 0}} 
+    const where= { where: { ...statusCondition, ...categoryCondition, ...priceCondition , ...stockCondition } };
     
     const products = await prisma.product.findMany({ include: { Category: true } , ...where  })
 
@@ -42,7 +43,7 @@ export const getDividedProducts = cache(async (status?: string, category?: strin
 
 
 export const getProductsGroupedByCategories = cache(async () => {
-    const products = await prisma.product.findMany({include : {Category  : true}})
+    const products = await prisma.product.findMany({include : {Category  : true}, where : {stock : {gt : 0}}})
     const categories = await prisma.category.findMany()
     const result = categories.map(category=>{
         const groupedProducts = products.filter(product=>product.categoryId === category.id) 
@@ -52,6 +53,6 @@ export const getProductsGroupedByCategories = cache(async () => {
 })
 
 export const getBestSellers = cache(async()=>{
-    const bestSellers = await prisma.product.findMany({orderBy : {orderTimes : "asc"} , take : 8})
+    const bestSellers = await prisma.product.findMany({orderBy : {orderTimes : "asc"} , where : {stock : {gt : 0}} , take : 8})
     return serializeData(bestSellers) as ProductType[]
 })

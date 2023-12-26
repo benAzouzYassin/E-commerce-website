@@ -1,4 +1,5 @@
-import axios from "axios"
+"use client"
+
 import Nav from "@/components/Nav"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -7,13 +8,25 @@ import { Textarea } from "@/components/ui/textarea"
 import ImgField from "../../components/shared/ImgField"
 import CategorySelect from '../../components/shared/CategorySelect';
 import { createNewProduct, fetchCategories } from "@/actions/addProductActions"
+import { useFormStatus } from 'react-dom';
+import { Loader2Icon } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Category } from "@/types/globalTypes"
 
 
 
 
 
-export default async function Page() {
-    const { data: savedCategories, error: categoriesErr } = await fetchCategories()
+export default function Page() {
+    const { pending } = useFormStatus()
+    const [savedCategories, setSavedCategories] = useState<Category[]>([])
+    useEffect(()=>{
+
+        fetchCategories()
+        .then(data => setSavedCategories(data.data))
+        .catch(err => console.log(err))
+
+    }, [])
     return <main>
         <Nav currentPage="Products" />
         <h2 className="px-20  text-4xl mt-2 font-bold">Add product</h2>
@@ -23,7 +36,7 @@ export default async function Page() {
                 <div className=" w-full h-72  border-2 rounded-xl hover:cursor-pointer" >
                     <div className=" relative bg-accent-foreground/5 h-[220px] hover:bg-accent-foreground/10 transition-colors mx-auto mt-3 text-8xl text-foreground/50 text-center w-[90%] flex items-center justify-center border-foreground/50 border-2 border-dashed">
                         <span className="absolute">+</span>
-                        <ImgField defaultUrl="" />
+                        <ImgField required={true} defaultUrl="" />
                     </div>
                     <p className="ml-4 mt-3 font-medium line-clamp-2 pr-3"></p>
                 </div>
@@ -59,13 +72,12 @@ export default async function Page() {
                     <span>Product description</span>
                     <Textarea name="productDescription" placeholder="product description" required />
                     <span>Stock</span>
-                    <Input name="productStock" type="number" min={0} placeholder="Normal price" />
+                    <Input name="productStock" type="number" min={0} placeholder="Product Stock" required />
                     <span>Normal Price</span>
                     <Input name="productPrice" type="number" min={0} placeholder="Normal price" required />
                     <span>Sale Price</span>
-                    <Input name="productSalePrice" type="number" min={0} placeholder="On Sale price" />
-                    <Button className="mt-11 font-semibold">Add product </Button>
-                </div>
+                    <Input name="productSalePrice" type="number" min={0} placeholder="On Sale price" required />
+                    <Button disabled={pending} className="mt-11 font-semibold">{pending ? <Loader2Icon className="animate-spin" /> : "Add product"} </Button>                </div>
             </div>
         </form>
     </main>

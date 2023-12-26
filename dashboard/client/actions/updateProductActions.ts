@@ -61,7 +61,6 @@ export async function fetchProduct(productId: string) {
         categoryId: category,
         stock: Number(stock)
     }
-    console.log(updatedProduct)
     const response = await axios.put(process.env["BACKEND_URL"] + "/product/updateOne/"+productId, updatedProduct)
       if(response.status !== 200) redirect("/updateError")  
       if(response.status === 200){

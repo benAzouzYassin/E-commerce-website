@@ -25,7 +25,7 @@ model Product {
   orderTimes       Int
   salePrice        Decimal
   additionalImages String[]
-  status           String // "on sale" | "sold out" | "hidden" | "coming soon" | "published";
+  status           String // "on sale" | "sold out" | "hidden" | "coming soon" | "published" | "deleted";
   category Category @relation(fields: [categoryId], references: [id])
   categoryId String
   createdAt DateTime @default(now())
@@ -49,5 +49,5 @@ model Order {
 
 model visits {
   id String @id @default(uuid())
-  totalVisits  BigInt
+  visitDate   DateTime @default(now())
 }

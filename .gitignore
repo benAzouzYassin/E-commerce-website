@@ -1,0 +1,3 @@
+./dashboard/server/.env
+./dashboard/client/.env
+./main-page/.env

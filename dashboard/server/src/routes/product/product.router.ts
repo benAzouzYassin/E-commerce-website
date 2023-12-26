@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify"
-import { createOneHandler, getAllHandler, getOneByIdHandler, updateOneHandler } from "./product.controller"
+import { createOneHandler, deleteOneHandler, getAllHandler, getOneByIdHandler, updateOneHandler } from "./product.controller"
 import { $ref } from "./product.schema"
 
 export async function productRouter(server: FastifyInstance) {
@@ -11,4 +11,5 @@ export async function productRouter(server: FastifyInstance) {
     server.put("/updateOne/:id" , {
         schema: { body: $ref("CreateProductSchema") }
     } , updateOneHandler)
+    server.delete("/delete/:id" , deleteOneHandler)
 }

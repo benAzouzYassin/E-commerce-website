@@ -45,6 +45,6 @@ model Product {
 }
 
 model visits {
-  id          String @id
-  totalVisits BigInt
+  id        String   @id
+  visitDate DateTime @default(now())
 }

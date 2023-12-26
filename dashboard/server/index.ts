@@ -8,6 +8,7 @@ import { dashboardRouter } from "./src/routes/dashboard/dashboard.router"
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import { orderRouter } from "./src/routes/order/order.router";
+import { prisma } from "./src/utils/prisma";
 
 const server = Fastify({
   logger: false,
