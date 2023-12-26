@@ -14,7 +14,7 @@ import { Category } from "@prisma/client";
 import { addUrlParams } from "@/utils/others";
 
 export default function Filters() {
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     useEffect(() => {
         getCategories()
             .then((data) => setCategories(data))

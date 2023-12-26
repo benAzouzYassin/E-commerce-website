@@ -23,7 +23,7 @@ export default function useSaveStatus(orderId : string , defaultStatus : string)
     } , [orderId , defaultStatus])
 
     useEffect(() => {
-        const timeoutId = setTimeout(()=>saveNewStatus(status),500) 
+        const timeoutId = setTimeout(()=>saveNewStatus(status),100) 
         return ()=>clearTimeout(timeoutId)
     }
 

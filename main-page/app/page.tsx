@@ -24,7 +24,7 @@ export default async function Home() {
         <main className="w-full px-2 relative flex-col z-10 bg-background pb-36 flex opacity-100 overflow-x-hidden">
             <Nav animate={true} className=" w-[80%] mx-auto" />
             <Hero />
-            <div className="flex  flex-col md:px-16 px-5 mt-24 lg:px-16">
+            <div className="flex  flex-col md:px-16 px-5 mt-0 lg:px-16">
                 <BestSellers/>
                 {productGroups.map((group , index)=><CategoryOverview  name={group?.[0]?.Category?.name  ?? ""} key={index} products={group}/>)  }
             </div>

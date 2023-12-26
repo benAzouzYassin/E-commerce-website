@@ -14,7 +14,7 @@ export default function DeleteBtn({ productId }: { productId: string; }) {
             if (res) {
                 console.log(res)
                 toast.success("deleted successfully");
-                setTimeout(()=>window.location.href = `/products?key=${secretKey}` , 1000)
+                setTimeout(()=>window.location.href = `/products?key=${secretKey}` , 1500)
             }
 
         }).catch(err => console.log(err));

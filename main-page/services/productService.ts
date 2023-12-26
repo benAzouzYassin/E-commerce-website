@@ -53,6 +53,6 @@ export const getProductsGroupedByCategories = cache(async () => {
 })
 
 export const getBestSellers = cache(async()=>{
-    const bestSellers = await prisma.product.findMany({orderBy : {orderTimes : "asc"} , where : {stock : {gt : 0}} , take : 8})
+    const bestSellers = await prisma.product.findMany({orderBy : {orderTimes : "asc"} , include : {Category : true} , where : {stock : {gt : 0}} , take : 8})
     return serializeData(bestSellers) as ProductType[]
 })

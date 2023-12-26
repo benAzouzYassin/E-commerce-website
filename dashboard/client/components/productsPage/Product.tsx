@@ -7,7 +7,7 @@ import useSecretKey from "@/customHooks/useSecretKey";
 export default function Product(props : Partial<Product>) {
     const secretKey = useSecretKey() 
 
-    return   <div className="relative">
+    return   <div className="relative" id={props.id}>
         <DeleteBtn productId={props?.id ?? ""}/>
                 <Link href={`/updateProduct/${props.id}?key=${secretKey}`} className="p-2 hover:cursor-pointer hover:scale-105 transition-transform rounded-sm  border-2 flex flex-col h-80" key={props.id}>
                 <div className="h-1/2 w-full relative p-1 ">

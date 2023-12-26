@@ -50,8 +50,9 @@ export async function updateStatus(status : string , orderId : string) {
     const possibleStates = ["waiting" , "validated" ,"sent" , "canceled"]
     if (possibleStates.indexOf(status) === -1) return {data : null , error : "not valid status possible ones are [waiting, validated, sent, canceled]"}
     try {
-        const updateResult = await prisma.order.update({data :{status : status} , where : {id : orderId} }) 
-       return updateResult?{ data: "updated successfully !", statusCode:200 , error:null  } :  { data: null, statusCode:500 , error:"error while creating the order!"  };
+        const updateOrderResult = await prisma.order.update({data :{status : status} , where : {id : orderId} }) 
+        const updateProductResult = await prisma.product.update({ data : { orderTimes : {increment : updateOrderResult.productQuantity }} ,  where : {id  : updateOrderResult?.productId }})
+       return updateOrderResult && updateProductResult ?{ data: "updated successfully !", statusCode:200 , error:null  } :  { data: null, statusCode:500 , error:"error while creating the order!"  };
     } catch (error) {
       return { data: null, statusCode: 500, error: error.message };
     }

@@ -3,6 +3,7 @@ import Nav from '../../components/Nav';
 import Products from '../../components/productsPage/Products';
 import { Category } from '@/types/globalTypes';
 
+export const revalidate = 1
 
 export default async function Page() {
     const { data: products, error: productsErr } = await fetchProducts()

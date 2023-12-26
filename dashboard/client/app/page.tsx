@@ -17,7 +17,6 @@ import { RecentOrders } from "@/components/mainPage/RecentSales"
 
 import Nav from "@/components/Nav"
 import DashboardCard from "@/components/mainPage/DashboardCard"
-import { DashboardData } from "@/types/globalTypes"
 import { getDashboardData } from "@/actions/mainPageActions"
 
 export const metadata: Metadata = {

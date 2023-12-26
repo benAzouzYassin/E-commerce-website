@@ -36,8 +36,8 @@ export async function createNewProduct(data: FormData) {
         
     } catch (error: any) {
     }
-    revalidatePath("/products")
-    redirect("/products")
+    revalidatePath("/products")   
+    redirect("/products?key=" + process.env["SECRET_KEY"])
 }
 
 

@@ -65,7 +65,7 @@ export async function fetchProduct(productId: string) {
       if(response.status !== 200) redirect("/updateError")  
       if(response.status === 200){
       revalidatePath("/products")
-      redirect("/products")    
+      redirect("/products?key=" + process.env["SECRET_KEY"])    
       }
   }
     
