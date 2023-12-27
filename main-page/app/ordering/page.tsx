@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { Toaster, toast } from 'sonner';
 import { AnimatePresence, motion } from "framer-motion";
 import {ShoppingCart ,X} from "lucide-react"
-import { isLargeScreen } from "@/utils/others";
 
 export default function Page() {
     const [userName, setUserName] = useState("");
@@ -18,7 +17,7 @@ export default function Page() {
     const [address, setAddress] = useState("");
     const [formError, setFormError] = useState({ userNameField: "", addressField: "", phoneNumberField: "" })
     const [isLoading, setIsLoading] = useState(false)
-    const [isCartVisible, setIsCartVisible] = useState(isLargeScreen())
+    const [isCartVisible, setIsCartVisible] = useState(false)
     //handling phone animations
 
     const { cartItems, removeAllItems } = useCartContext();

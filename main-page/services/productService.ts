@@ -1,7 +1,9 @@
-import { serializeData } from "@/utils/others";
 import { prisma } from "@/utils/prisma";
 import { Product  } from '@prisma/client';
-import { cache } from "react";
+
+function serializeData(object : unknown) {
+    return JSON.parse(JSON.stringify(object))
+}
 
 
 
@@ -22,7 +24,7 @@ export type ProductType = {
 }
 
 
-export const getDividedProducts = cache(async (status?: string, category?: string, price?: string) => {
+export const getDividedProducts = async (status?: string, category?: string, price?: string) => {
     // building query  
     const statusCondition = status ?  {status:status}: {}
     const categoryCondition = category ?  {categoryId: category } : {}
@@ -39,20 +41,20 @@ export const getDividedProducts = cache(async (status?: string, category?: strin
         dividedProducts[dividedProducts.length - 1].push(item)
     })
     return serializeData(dividedProducts)
-})
+}
 
 
-export const getProductsGroupedByCategories = cache(async () => {
+export const getProductsGroupedByCategories = async () => {
     const products = await prisma.product.findMany({include : {Category  : true}, where : {stock : {gt : 0}}})
     const categories = await prisma.category.findMany()
     const result = categories.map(category=>{
-        const groupedProducts = products.filter(product=>product.categoryId === category.id) 
+        const groupedProducts =  products.filter(product=>product.categoryId === category.id) 
         return groupedProducts
     })
-    return serializeData(result) as Array<ProductType[]>
-})
+    return await serializeData(result) as Array<ProductType[]>
+}
 
-export const getBestSellers = cache(async()=>{
+export const getBestSellers = async()=>{
     const bestSellers = await prisma.product.findMany({orderBy : {orderTimes : "asc"} , include : {Category : true} , where : {stock : {gt : 0}} , take : 8})
     return serializeData(bestSellers) as ProductType[]
-})
+}

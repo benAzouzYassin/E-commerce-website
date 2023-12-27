@@ -23,14 +23,14 @@ export default async function Products({
     searchParams?: { [key: string]: string | string[] | undefined };
 }) {
     
-    const pageNumber = parseInt(params.pageNumber);
+    const pageNumber = parseInt(params.pageNumber)  ?? 1;
     const searchValue = searchParams?.["searchValue"]?.toString();
     const category =  searchParams?.["category"]?.toString() ;
     const price = searchParams?.["price"]?.toString();
     const status = searchParams?.["status"]?.toString() ;
 
     const products = await getDividedProducts(status ,category ,  price);
-    const isValidPageNumber = pageNumber <= products.length;
+    const isValidPageNumber =   pageNumber <= products.length;
 
     //handle the searching of a product by name
     const currentPageProducts = await products?.[pageNumber - 1];

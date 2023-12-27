@@ -11,7 +11,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Suspense, useEffect, useState } from "react";
 import { getCategories } from "@/actions/sharedActions";
 import { Category } from "@prisma/client";
-import { addUrlParams } from "@/utils/others";
+import { addUrlParams } from "@/utils/addUrlParams";
 
 export default function Filters() {
     const [categories, setCategories] = useState<Category[]>([]);
