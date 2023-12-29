@@ -13,7 +13,7 @@ export const metadata = {
     title: "products",
 };
 
-export const revalidate = 300; //revalidate cache every 5 minutes
+export const dynamic = 'force-dynamic'
 
 export default async function Products({
     params,

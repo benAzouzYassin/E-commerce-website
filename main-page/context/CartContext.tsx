@@ -31,7 +31,7 @@ const getItemIndex = (itemId: string, items: CartItemType[]) => {
 
 export function CartContextProvider({ children }: { children: React.ReactNode}) {
     const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-    const [isCartOpen , setIsCartOpen ]= useState(false)
+    const [isCartOpen , setIsCartOpen ]= useState(true)
     
     const toggleCart =()=> setIsCartOpen(!isCartOpen)
     const openCart =()=> setIsCartOpen(true)
@@ -40,7 +40,6 @@ export function CartContextProvider({ children }: { children: React.ReactNode}) 
     const addItem = (product: ProductType) => {
         const indexInCart = getItemIndex(product.id, cartItems);
         const exists = indexInCart !== -1;
-        console.log(exists);
         if (!exists) {
             setCartItems([...cartItems, { ...product, cartQuantity: 1 }]);
             return;
