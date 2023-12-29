@@ -29,7 +29,7 @@ export default function Page() {
             <p className="text-white/60 w-1/2 text-center">The secret should be handed to you by the creator of this website</p>
             <form onSubmit={handleSubmit} className="w-fit flex flex-col gap-5">
             <Input onChange={(e) => setInput(e.target.value)} className="w-[22vw]" placeholder="Your key.." />
-            <Button onClick={handleSubmit} className="w-[75%] mx-auto font-bold text-md">Login</Button>
+            <Button className="w-[75%] mx-auto font-bold text-md">Login</Button>
             </form>
             <Toaster duration={1500} toastOptions={{ style: { fontSize: 18, fontWeight: 400 } }} richColors theme="dark" />
         </section>
