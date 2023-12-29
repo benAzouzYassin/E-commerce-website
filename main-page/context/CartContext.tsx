@@ -31,7 +31,7 @@ const getItemIndex = (itemId: string, items: CartItemType[]) => {
 
 export function CartContextProvider({ children }: { children: React.ReactNode}) {
     const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-    const [isCartOpen , setIsCartOpen ]= useState(true)
+    const [isCartOpen , setIsCartOpen ]= useState(false)
     
     const toggleCart =()=> setIsCartOpen(!isCartOpen)
     const openCart =()=> setIsCartOpen(true)
