@@ -48,7 +48,7 @@ server.register(productRouter, { prefix: "/product" })
 server.register(orderRouter, { prefix: "/order" })
 
 async function start() {
-  const address = await server.listen({ port: process.env["PORT"]});
+  const address = await server.listen({ port: 3000});
   console.log("server is live on ", address)
   server.swagger();
 }

@@ -104,7 +104,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               defaultValue={productData?.salePrice}
               placeholder="On Sale price"
             />
-            <Button className="mt-5 font-semibold">Add product </Button>
+            <Button className="mt-5 font-semibold">Update product </Button>
           </div>
         </div>
       </form>

@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 
 export default async function DashboardPage() {
   const { data, error } = await getDashboardData()
+  console.log(data , error)
   return (
     <>
       <div className="md:hidden" >

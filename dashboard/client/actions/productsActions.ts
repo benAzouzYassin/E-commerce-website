@@ -1,4 +1,9 @@
 "use server"
+
+import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
+
+
 export async function fetchCategories() {
     const backendUrl = process.env["BACKEND_URL"]
     try {
@@ -20,7 +25,12 @@ export async function fetchProducts() {
 export async function deleteProduct(productId : string) {
     const backendUrl = process.env["BACKEND_URL"]
     try {
-        return await ((await fetch(`${backendUrl}/product/delete/${productId}` , {method : "delete"})).json())
+        const res = await ((await fetch(`${backendUrl}/product/delete/${productId}` , {method : "delete"})).json())
+        if(res){
+            revalidatePath("/products")
+            redirect("/products?key=" + process.env["SECRET_KEY"])
+        }
+        return res
     } catch (error: any) {
         return { data: [], error: error.message }
     }

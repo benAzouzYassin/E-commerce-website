@@ -7,6 +7,8 @@ export async function getDashboardData(): Promise<{
     error: string | null
   }> {
     const backendUrl = process.env["BACKEND_URL"]
+    console.log((await (await fetch(`${backendUrl}/dashboard/data`, { cache: "no-cache" })).json())) 
+    
     try {
       return await ((await fetch(`${backendUrl}/dashboard/data`, { cache: "no-cache" })).json())
     } catch (error: any) {
