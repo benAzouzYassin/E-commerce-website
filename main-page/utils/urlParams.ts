@@ -5,7 +5,11 @@ export function addUrlParams(...params: { key: string, value: string }[]) {
     for (const { key, value } of params) {
         newUrl.searchParams.set(key, value)
     }
-    if(window){
+    if (window) {
         window.location.href = newUrl.href
     }
+}
+
+export function clearFilter() {
+    window.location.href = window.location.origin + window.location.pathname;
 }

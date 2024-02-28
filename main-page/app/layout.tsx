@@ -1,8 +1,10 @@
 
-import { Inter } from "next/font/google";
+import { Blinker } from "next/font/google"
 import "./globals.css";
 import { CartContextProvider } from "@/context/CartContext";
-const inter = Inter({ subsets: ['latin'] })
+import Nav from "@/components/shared/Nav";
+import Footer from "@/components/shared/Footer";
+const blinker = Blinker({ subsets: ["latin"], weight: ["300", "400", "600", "700", "800"] })
 
 export const metadata = {
     title: "Hg store",
@@ -14,9 +16,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={inter.className}>
+        <html lang="en" className={blinker.className}>
             <CartContextProvider>
-                <body >{children}</body>
+                <body >
+                    <Nav />
+                    {children}
+                    <Footer />
+
+                </body>
             </CartContextProvider>
         </html>
     );

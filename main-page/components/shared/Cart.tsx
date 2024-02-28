@@ -13,20 +13,20 @@ import CartItem from "./CartItem";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export default function Cart( {className } : {className? : string}) {
-    const { cartItems, isCartOpen, openCart} = useCartContext();
+export default function Cart({ className }: { className?: string }) {
+    const { cartItems, isCartOpen, openCart } = useCartContext();
     return (
-        <>
-            <div
-                className={cn("justify-self-end hover:cursor-pointer absolute right-7 bg-gradient-to-tr from-[#db6494] to-[#eeb626] py-2 text-white font-bold px-6 rounded-md active:scale-100 hover:scale-[103%] transition-transform flex items-center gap-1 group" , className)}
+        <div className={className}>
+            <button
+                className="mt-1"
                 onClick={openCart}>
-                {" "}
-                View Cart
-                <ShoppingCart className="stroke-[3px] transition-all group-hover:mr-[-4px] group-hover:ml-1" />
-            </div>
+                <ShoppingCart className=" stroke-black/80  hover:scale-105 transition-transform active:scale-100 hover:cursor-pointer" />
+            </button>
             <div className="z-[999]">
-                <Sheet open={isCartOpen}>
-                    <SheetContent className="px-0">
+
+                {/** The sliding menu (opens when cart is clicked) */}
+                <Sheet open={isCartOpen} >
+                    <SheetContent className="px-0 bg-white">
                         <SheetHeader className="mb-5">
                             <SheetTitle className="ml-3 -mt-3">
                                 My Cart :
@@ -52,6 +52,6 @@ export default function Cart( {className } : {className? : string}) {
                     </SheetContent>
                 </Sheet>
             </div>
-        </>
+        </div>
     );
 }

@@ -1,4 +1,4 @@
-import Item from "./Item";
+import Item from "../shared/Item";
 import { ProductType } from "@/services/productService";
 import Link from "next/link";
 

@@ -7,16 +7,16 @@ export type CartItemType = {
 } & ProductType;
 
 type ContextType = {
-    addItem: (product: ProductType) => void;
+    addItem: (product: ProductType, count: number) => void;
     removeOneItem: (id: string) => void;
     removeAllItems: () => void;
     removeItemAllQuantity: (id: string) => void
     cartItems: CartItemType[];
     addQuantityToItem: (id: string, quantity: number) => void
-    isCartOpen : boolean
-    toggleCart : ()=>void
-    closeCart : ()=>void
-    openCart : ()=>void
+    isCartOpen: boolean
+    toggleCart: () => void
+    closeCart: () => void
+    openCart: () => void
 };
 
 const CartContext = createContext<ContextType | null>(null);
@@ -29,24 +29,27 @@ const getItemIndex = (itemId: string, items: CartItemType[]) => {
     return -1;
 };
 
-export function CartContextProvider({ children }: { children: React.ReactNode}) {
+export function CartContextProvider({ children }: { children: React.ReactNode }) {
     const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-    const [isCartOpen , setIsCartOpen ]= useState(false)
-    
-    const toggleCart =()=> setIsCartOpen(!isCartOpen)
-    const openCart =()=> setIsCartOpen(true)
-    const closeCart =()=> setIsCartOpen(false)
-    
-    const addItem = (product: ProductType) => {
+    const [isCartOpen, setIsCartOpen] = useState(false)
+
+    const toggleCart = () => setIsCartOpen(!isCartOpen)
+    const openCart = () => setIsCartOpen(true)
+    const closeCart = () => setIsCartOpen(false)
+
+    const addItem = (product: ProductType, count: number) => {
+        openCart()
         const indexInCart = getItemIndex(product.id, cartItems);
         const exists = indexInCart !== -1;
+
         if (!exists) {
-            setCartItems([...cartItems, { ...product, cartQuantity: 1 }]);
+            setCartItems([...cartItems, { ...product, cartQuantity: count }]);
             return;
         }
+
         setCartItems((prev) => {
             const updatedItems = [...prev];
-            updatedItems[indexInCart].cartQuantity += 1;
+            updatedItems[indexInCart].cartQuantity += count;
             return updatedItems;
         });
     };
@@ -70,6 +73,7 @@ export function CartContextProvider({ children }: { children: React.ReactNode}) 
     };
 
     const addQuantityToItem = (id: string, quantity: number) => {
+
         setCartItems(cartItems.map(item => {
             const oldQuantity = item.cartQuantity
             return item.id === id ? { ...item, cartQuantity: oldQuantity + quantity } : item
@@ -84,7 +88,7 @@ export function CartContextProvider({ children }: { children: React.ReactNode}) 
     }
     return (
         <CartContext.Provider
-            value={{ addItem, cartItems, removeAllItems, removeOneItem, addQuantityToItem, removeItemAllQuantity ,toggleCart , isCartOpen ,closeCart , openCart }}>
+            value={{ addItem, cartItems, removeAllItems, removeOneItem, addQuantityToItem, removeItemAllQuantity, toggleCart, isCartOpen, closeCart, openCart }}>
             {children}
         </CartContext.Provider>
     );
