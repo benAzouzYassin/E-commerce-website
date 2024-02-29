@@ -18,12 +18,12 @@ export default async function Trending() {
 
     return <div className="w-full relative mt-20">
         <Carousel className="w-full " >
-            <CarouselNext className="top-0  bg-white border-black relative border-2  hover:bg-black/10 rounded-none px-7 h-8 left-[95%] translate-x-0" >
+            <CarouselNext className="top-0 hidden lg:flex  bg-white border-black relative border-2  hover:bg-black/10 rounded-none px-7 h-8 left-[95%] translate-x-0" >
                 <p className=" font-semibold">
                     Right
                 </p>
             </CarouselNext>
-            <CarouselPrevious className="top-0 absolute m-0 bg-white border-2 border-black/10  left-[89%] translate-x-0 rounded-none px-7 h-8 right-16">
+            <CarouselPrevious className="top-0  hidden lg:flex absolute m-0 bg-white border-2 border-black/10  left-[89%] translate-x-0 rounded-none px-7 h-8 right-16">
                 <p className=" font-semibold">
                     Left
                 </p>

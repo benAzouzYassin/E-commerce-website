@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,76 +10,79 @@
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
- 
+
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
- 
+
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
- 
+
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
- 
+
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
- 
+
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
- 
+
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
- 
+
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
- 
+
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
- 
+
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
- 
+
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
- 
+
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
- 
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
- 
+
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+
   }
 }
 
-.gird-auto-cols{
+.gird-auto-cols {
   display: grid;
   grid-auto-columns: 100px;
 }
+
 .custom-text-shadow {
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -87,6 +91,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -94,4 +99,96 @@
 
 .spin {
   animation: rotateSpinner 1s linear infinite;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8f8f8f;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #666666;
+}
+
+.nav-btn {
+  --s: 30px;
+  /* control the size */
+  --c: black;
+  /* the color */
+
+  height: var(--s);
+  aspect-ratio: 1;
+  border: none;
+  padding: 0;
+  border-inline: calc(var(--s)/2) solid #0000;
+  box-sizing: content-box;
+  --_g1: linear-gradient(var(--c) 20%, #0000 0 80%, var(--c) 0) no-repeat content-box border-box;
+  --_g2: radial-gradient(circle closest-side at 50% 12.5%, var(--c) 95%, #0000) repeat-y content-box border-box;
+  background:
+    var(--_g2) left var(--_p, 0px) top,
+    var(--_g1) left calc(var(--s)/10 + var(--_p, 0px)) top,
+    var(--_g2) right var(--_p, 0px) top,
+    var(--_g1) right calc(var(--s)/10 + var(--_p, 0px)) top;
+  background-size:
+    20% 80%,
+    40% 100%;
+  position: relative;
+  clip-path: inset(0 25%);
+  -webkit-mask: linear-gradient(90deg, #0000, #000 25% 75%, #0000);
+  cursor: pointer;
+  transition:
+    background-position .3s var(--_s, .3s),
+    clip-path 0s var(--_s, .6s);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.nav-btn:before,
+.nav-btn:after {
+  content: "";
+  position: absolute;
+  border-radius: var(--s);
+  inset: 40% 0;
+  background: var(--c);
+  transition: transform .3s calc(.3s - var(--_s, .3s));
+}
+
+.nav-btn:checked {
+  clip-path: inset(0);
+  --_p: calc(-1*var(--s));
+  --_s: 0s;
+}
+
+.nav-btn:checked:before {
+  transform: rotate(45deg);
+}
+
+.nav-btn:checked:after {
+  transform: rotate(-45deg);
+}
+
+.nav-btn:focus-visible {
+  clip-path: none;
+  -webkit-mask: none;
+  border: none;
+  outline: 2px solid var(--c);
+  outline-offset: 5px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
 }

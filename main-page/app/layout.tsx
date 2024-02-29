@@ -2,7 +2,6 @@
 import { Blinker } from "next/font/google"
 import "./globals.css";
 import { CartContextProvider } from "@/context/CartContext";
-import Nav from "@/components/shared/Nav";
 import Footer from "@/components/shared/Footer";
 const blinker = Blinker({ subsets: ["latin"], weight: ["300", "400", "600", "700", "800"] })
 
@@ -18,8 +17,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={blinker.className}>
             <CartContextProvider>
-                <body >
-                    <Nav />
+                <body className="overflow-x-hidden" >
                     {children}
                     <Footer />
 

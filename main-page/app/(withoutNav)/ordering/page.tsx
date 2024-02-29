@@ -1,15 +1,18 @@
 "use client";
 
 import { useCartContext } from "@/context/CartContext";
-import CartItem from "../../components/shared/CartItem";
-import { FormEvent, useState } from "react";
+import CartItem from "../../../components/shared/CartItem";
+import { FormEvent, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { OrderItems } from "@/actions/orderingActions";
 import { Loader2Icon } from "lucide-react"
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from 'sonner';
 import { AnimatePresence, motion } from "framer-motion";
-import {ShoppingCart ,X} from "lucide-react"
+import { ShoppingCart, X } from "lucide-react"
+
+
+
 
 export default function Page() {
     const [userName, setUserName] = useState("");
@@ -17,11 +20,16 @@ export default function Page() {
     const [address, setAddress] = useState("");
     const [formError, setFormError] = useState({ userNameField: "", addressField: "", phoneNumberField: "" })
     const [isLoading, setIsLoading] = useState(false)
+
     const [isCartVisible, setIsCartVisible] = useState(false)
-    //handling phone animations
 
     const { cartItems, removeAllItems } = useCartContext();
     const router = useRouter()
+    //close  cart for small screens.
+    useEffect(() => {
+        const isLargeScreen = window.innerWidth >= 768;
+        setIsCartVisible(isLargeScreen)
+    }, [])
 
     const price = cartItems.reduce((acc, curr) => {
         return curr.status === "on sale"
@@ -77,13 +85,13 @@ export default function Page() {
     };
 
     return (
-        <main className="bg-white h-[100vh]  w-[100vw] ">
+        <main className="bg-white h-[100vh] w-[100vw]     ">
             <section className=" relative flex  ">
-                <div className="w-full px-10 xl:px-96">
-                        <ShoppingCart className="scale-150 absolute right-7 top-5" onClick={() => setIsCartVisible(!isCartVisible)}/>
-                        <p className="absolute font-bold left-1/2 -translate-x-1/2 xl:text-3xl  text-xl  text-center w-full top-14">Completing your order </p>
-                    <form onSubmit={handleSubmit} className="mt-24 xl:mt-36 flex flex-col gap-3">
-                        <label className="font-bold text-md">
+                <div className=" relative w-full px-10 xl:px-96">
+                    <ShoppingCart className="scale-150  absolute right-7 top-5" onClick={() => setIsCartVisible(!isCartVisible)} />
+                    {/* <p className="absolute font-bold left-1/2 -translate-x-1/2 xl:text-3xl  text-xl  text-center w-full top-14">Completing your order </p> */}
+                    <form onSubmit={handleSubmit} className="mt-24   xl:mt-36 xl:px-64  flex flex-col gap-3">
+                        <label className="font-bold text-md mt-14">
                             Name
                             <span className="font-black text-red-500/80">
                                 *
@@ -135,12 +143,12 @@ export default function Page() {
 
                     </form>
                 </div>
-                 
-              <AnimatePresence> 
+
+                <AnimatePresence>
                     {isCartVisible && <motion.div initial={{ opacity: 0, x: 500 }} exit={{ opacity: 0, x: 500 }} transition={{ duration: 0.3, bounce: false, type: "keyframes" }} animate={{ opacity: 1, x: 0 }} className="absolute w-[85%] xl:w-96 lg:w-1/2 right-0" >
 
                         <article className="  border-black z-50 px-5  h-[100vh] bg-[#ffffff] border-2">
-                            <X className="stroke-3 scale-150 absolute right-5 top-5" onClick={()=>setIsCartVisible(false)} />
+                            <X className="stroke-3 scale-150 absolute right-5 top-5" onClick={() => setIsCartVisible(false)} />
                             <p className="font-bold absolute top-20 ">
                                 Purchase summary ({cartItems.length})
                             </p>

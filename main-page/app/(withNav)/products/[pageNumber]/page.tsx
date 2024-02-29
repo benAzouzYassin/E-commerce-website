@@ -11,6 +11,7 @@ export const metadata = {
     title: "products",
 };
 
+
 export const dynamic = 'force-dynamic'
 
 export default async function Products({
@@ -40,14 +41,13 @@ export default async function Products({
         : currentPageProducts;
     await wait(5000)
     return (
-        <main className="w-full px-72 min-h-[100vh] h-fit relative  flex-col z-10 bg-[#fafafa] flex opacity-100">
-            <div className="  px-4 lg:px-20 h-full mt-36 pb-20">
+        <main className="w-full md:px-32 lg:56 xl:px-72  min-h-[100vh] h-fit relative  flex-col z-10 bg-[#fafafa] flex opacity-100">
+            <div className="  px-4 xl:px-20 h-full mt-10 lg:mt-20 pb-20">
                 <Suspense fallback="loading...">
                     <Filters selectedCategory={category ?? "all"} />
-
                 </Suspense>
                 <div className="h-full  gap-5 flex-col w-full  flex ">
-                    <div className="grid grid-cols-4 gap-5">
+                    <div className="grid sm:grid-cols-3  lg:grid-cols-4 grid-cols-2 gap-5">
                         {isValidPageNumber &&
                             visibleProducts?.map((product: ProductType) => {
                                 return <Item key={product.id} {...product} />;
