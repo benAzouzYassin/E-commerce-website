@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 export default function Footer() {
     return <footer className="mt-auto w-full px-20 h-fit overflow-hidden py-2 bg-black  flex flex-col lg:flex-row items-center text-white ">
-        <div className="w-full text-[16px]  lg:text-xl  items-center gap-5  flex justify-center  text-center mx-auto  h-20 bg-black">
+        <div className="w-full text-[16px]  lg:text-xl  items-center gap-3  flex justify-center  text-center mx-auto  h-20 bg-black">
             <a className="text-white hover:underline underline-offset-4" href="#">About</a>
             <a className="text-white hover:underline underline-offset-4" href="#">Location</a>
             <a className="text-white hover:underline underline-offset-4" href="#">Facebook</a>

@@ -30,8 +30,8 @@ export default async function Trending() {
             </CarouselPrevious>
             <CarouselContent className="  border-red-500  ">
                 {bestSellers.map(product => (
-                    <div className="w-[300px]" key={product.id}>
-                        <CarouselItem key={product.id} className=" w-[300px] " >
+                    <div className=" w-[230px]  lg:w-[300px]" key={product.id}>
+                        <CarouselItem key={product.id} className=" w-[230px] lg:w-[300px] " >
                             <Item key={product.id} {...product} />
                         </CarouselItem>
                     </div>

@@ -15,11 +15,11 @@ export default function Nav({ className }: { className?: string }) {
         <>
             <nav
                 className={cn(
-                    "z-[50] w-[100vw]    lg:block    lg:px-96 h-[8vh]  lg:h-[10vh] fixed  left-0 top-0 border-b flex   border border-neutral-200 shadow-sm   bg-[#ffffff]   ",
+                    "z-[50] w-[100vw]    lg:block    lg:px-96 h-[9vh]  lg:h-[10vh] fixed  left-0 top-0 border-b flex   border border-neutral-200 shadow-sm   bg-[#ffffff]   ",
                     className
                 )}>
                 <ArrowLeft onClick={() => router.back()} className="w-8 h-10 absolute stroke-[3px] lg:hidden  stroke-black/80 left-3 top-3" />
-                <input onClick={() => setMobileMenu(!mobileMenu)} checked={mobileMenu} type="checkbox" role="button" aria-label="Display the menu" className="nav-btn lg:hidden ml-auto mt-5 w-12 " />
+                <input onClick={() => setMobileMenu(!mobileMenu)} readOnly checked={mobileMenu} type="checkbox" role="button" aria-label="Display the menu" className="nav-btn lg:hidden ml-auto mt-5 w-12 " />
                 <div className="relative hidden  lg:flex w-full h-full  items-center justify-center gap-x-16  text-[22px] text-black">
                     {/* <Image
                         src="/logo.png"
@@ -49,7 +49,7 @@ export default function Nav({ className }: { className?: string }) {
                     </div>
                 </div>
 
-                {mobileMenu && <div className="  flex-col text-4xl flex absolute top-full gap-8 w-full h-[90vh] bg-white items-center">
+                {mobileMenu && <div className="  flex-col text-4xl flex absolute top-full  gap-8 w-full h-[90vh] bg-white items-center">
 
                     <Link
                         onClick={() => setMobileMenu(false)}
