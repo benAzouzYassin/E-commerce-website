@@ -1,3 +1,5 @@
+"use server"
+
 import { prisma } from "@/utils/prisma";
 import { Product } from '@prisma/client';
 

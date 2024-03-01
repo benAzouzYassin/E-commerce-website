@@ -11,8 +11,6 @@ import { Toaster, toast } from 'sonner';
 import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingCart, X } from "lucide-react"
 
-//TODO modify how the search work
-//TODO modify you personal portfolio 
 
 
 export default function Page() {
