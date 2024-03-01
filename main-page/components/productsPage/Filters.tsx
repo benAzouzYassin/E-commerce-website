@@ -16,6 +16,7 @@ export default function Filters({ selectedCategory }: { selectedCategory: string
             .finally(() => setIsFetching(false));
     }, []);
     const handleFilter = (categoryId: string) => {
+
         addUrlParams({ key: "category", value: categoryId });
     };
 
@@ -47,12 +48,19 @@ export default function Filters({ selectedCategory }: { selectedCategory: string
                 )}
             </ul>
 
-            <select className=" absolute top-0 right-0  lg:hidden border-none p-2">
-                <option onSelect={() => clearFilter()} value="">All</option>
+            <select onChange={(e) => {
+                if (e.target.value == "all") clearFilter()
+
+                handleFilter(e.target.value)
+            }} className=" absolute top-0 right-0  lg:hidden border-none p-2">
+                <option value="all">All</option>
                 {categories.map((category) => (
-                    <option onSelect={() => handleFilter(category.id)} value={category.id} key={category.id}>{category.name}</option>
+                    <option value={category.id} key={category.id}>{category.name}</option>
                 ))}
             </select>
         </div>
     );
 }
+
+
+

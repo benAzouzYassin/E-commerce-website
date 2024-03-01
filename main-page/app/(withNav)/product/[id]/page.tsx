@@ -14,11 +14,6 @@ import {
 } from "@/components/ui/carousel"
 import Item from "@/components/shared/Item"
 
-//TODO MAKE THE back button on the nav
-//TODO update your portfolio (10min)
-//TODO fix the overflow (5min)
-//TODO edit the scroll bar
-//TODO fix some bugs in the dashboard ()
 
 export default async function Page({ params }: { params: { id: string } }) {
     try {

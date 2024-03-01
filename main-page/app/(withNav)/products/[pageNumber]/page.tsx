@@ -40,7 +40,7 @@ export default async function Products({
         )
         : currentPageProducts;
     return (
-        <main className="w-[100vw] md:px-32 xl:px-96 min-h-[100vh] h-fit relative  flex-col z-10 bg-[#fafafa] flex opacity-100">
+        <main className="w-[100vw] md:px-32 xl:px-80 min-h-[100vh] h-fit relative  flex-col z-10 bg-[#fafafa] flex opacity-100">
             <div className=" flex flex-col h-full mt-10 lg:mt-20 pb-20">
                 <Suspense fallback="loading...">
                     <Filters selectedCategory={category ?? "all"} />
